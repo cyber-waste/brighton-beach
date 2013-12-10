@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:s="http://www.springframework.org/security/tags">
+    
+    <f:view contentType="text/html">
+    
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title>Brightonbeach :: #{title}</title>
+        </h:head>
+        
+        <h:body>
+            <h:form>
+                <h:panelGrid columns="1" border="0" width="100%">
+                    
+                    <h:panelGroup style="color: white;font-size: 80%;">
+                        <h:outputText value="User: "/>
+                        <b>
+                            <c:choose>
+                                <c:when test="${not empty currentUser.name}">${currentUser.name}</c:when>
+                                <c:otherwise>Anonymous</c:otherwise>
+                            </c:choose>
+                        </b>
+                    </h:panelGroup>
+                    
+                </h:panelGrid>
+            </h:form>
+            
+            <p:panel header="#{panelTitle}">
+                
+                <h:form id="centerForm">
+                    <p:toolbar id="toolBar" rendered="#{showToolBar != null ? showToolBar : true}">
+                        <p:toolbarGroup align="left">
+                            <h:panelGrid columns="16"> <!-- MAGIC NUMBER - simply more than can be needed -->
+                                <ui:insert name="leftToolbar" />
+                            </h:panelGrid>
+                        </p:toolbarGroup>
+                        <p:toolbarGroup align="right">
+                            <h:panelGrid columns="32"> <!-- MAGIC NUMBER - simply more than can be needed -->
+                                <ui:insert name="rightToolbar" />
+                            </h:panelGrid>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+	                
+	                <p:messages id="messages" globalOnly="true" autoUpdate="true"/>
+	                
+                    <ui:insert name="center"/>
+                    
+                </h:form>
+                
+                <ui:insert name="afterForm"/>
+                
+            </p:panel>
+            
+            <ui:insert name="dialogs"/>
+        </h:body>
+        
+    </f:view>
+</html>
