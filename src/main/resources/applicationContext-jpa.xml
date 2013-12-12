@@ -44,7 +44,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     
-    <jpa:repositories base-package="cyberwaste.brightonbeach.repository" />  
+    <jpa:repositories base-package="cyberwaste.brightonbeach.repository" />
    
 </beans>
 

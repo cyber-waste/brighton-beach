@@ -1,9 +1,22 @@
 # Eclipse #
-.settings/
+.settings/*
 .classpath
 .project
-bin/
+bin/*
 
 # Gradle #
-.gradle/
-build/
+.gradle/*
+build/*
+
+# Tomcat #
+tomcat/*
+!tomcat/bin
+!tomcat/conf
+!tomcat/lib
+!tomcat/webapps/host-manager
+!tomcat/webapps/manager
+!tomcat/webapps/ROOT
+!tomcat/LICENSE
+!tomcat/NOTICE
+!tomcat/RELEASE-NOTES
+
