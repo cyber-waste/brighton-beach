@@ -21,3 +21,4 @@ tomcat/webapps/brighton-beach.war
 !tomcat/RELEASE-NOTES
 
 /build
+/bin
