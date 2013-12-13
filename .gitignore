@@ -13,10 +13,11 @@ tomcat/*
 !tomcat/bin
 !tomcat/conf
 !tomcat/lib
-!tomcat/webapps/host-manager
-!tomcat/webapps/manager
-!tomcat/webapps/ROOT
+!tomcat/webapps
+tomcat/webapps/brighton-beach
+tomcat/webapps/brighton-beach.war
 !tomcat/LICENSE
 !tomcat/NOTICE
 !tomcat/RELEASE-NOTES
 
+/build
