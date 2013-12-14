@@ -11,12 +11,34 @@
     
         <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title>Brightonbeach :: #{title}</title>
+            
+            <title>brighton-beach :: #{title}</title>
+            
+            <link rel="stylesheet" href="${request.contextPath}/styles/custom.css" type="text/css" media="screen" />
+            
+            <ui:insert name="headIncludes"/>
+            <ui:insert name="scripts"/>
         </h:head>
         
         <h:body>
             <h:form>
-                <h:panelGrid columns="1" border="0" width="100%">
+                <h:panelGrid columns="3" border="0" width="100%" columnClasses="headerLogo,headerMenu" class="bb-title">
+                    
+                    <h:panelGroup>
+                        <p:spacer width="10"/>
+                        <h:graphicImage url="/images/logo.png" width="72" height="20" />
+                    </h:panelGroup>
+                    
+                    <p:menubar autoDisplay="false" styleClass="bb-title-menu" >
+                        <p:menuitem 
+                            value="Home" icon="ui-icon-home" 
+                            disabled="#{s:areNotGranted('admin')}" 
+                            url="underConstruction" />
+                            
+                        <p:menuitem 
+                            value="Logout" icon="ui-icon-close" 
+                            rendered="#{not empty currentUser.name}" url="logout"/>
+                    </p:menubar>
                     
                     <h:panelGroup style="color: white;font-size: 80%;">
                         <h:outputText value="User: "/>
@@ -34,7 +56,7 @@
             <p:panel header="#{panelTitle}">
                 
                 <h:form id="centerForm">
-                    <p:toolbar id="toolBar" rendered="#{showToolBar != null ? showToolBar : true}">
+                    <p:toolbar id="toolBar" styleClass="bb-action-panel" rendered="#{showToolBar != null ? showToolBar : true}">
                         <p:toolbarGroup align="left">
                             <h:panelGrid columns="16"> <!-- MAGIC NUMBER - simply more than can be needed -->
                                 <ui:insert name="leftToolbar" />
@@ -46,11 +68,9 @@
                             </h:panelGrid>
                         </p:toolbarGroup>
                     </p:toolbar>
-	                
-	                <p:messages id="messages" globalOnly="true" autoUpdate="true"/>
-	                
-                    <ui:insert name="center"/>
                     
+                    <p:messages id="messages" globalOnly="true" autoUpdate="true"/>
+                    <ui:insert name="center"/>
                 </h:form>
                 
                 <ui:insert name="afterForm"/>
