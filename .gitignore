@@ -24,3 +24,4 @@ tomcat/webapps/brighton-beach.war
 # Environment #
 src/main/resources/env-datasource.properties
 
+/build
