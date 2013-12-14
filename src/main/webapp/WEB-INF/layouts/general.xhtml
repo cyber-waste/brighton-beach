@@ -32,8 +32,20 @@
                     <p:menubar autoDisplay="false" styleClass="bb-title-menu" >
                         <p:menuitem 
                             value="Home" icon="ui-icon-home" 
-                            disabled="#{s:areNotGranted('ROLE_ADMIN')}" 
-                            url="underConstruction" />
+                            disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}" 
+                            url="cards" />
+                        
+                        <p:submenu label="Cards" icon="ui-icon-bookmark">
+                            <p:menuitem 
+                                value="Monitor" disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}" 
+                                url="cards" />
+                            
+                            <p:separator />
+                            
+                            <p:menuitem 
+                                value="Manage" disabled="#{s:areNotGranted('ROLE_ADMIN')}" 
+                                url="manageCards" />
+                        </p:submenu>
                             
                         <p:menuitem 
                             value="Logout" icon="ui-icon-close" 

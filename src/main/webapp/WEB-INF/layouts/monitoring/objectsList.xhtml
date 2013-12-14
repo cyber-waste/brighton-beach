@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:s="http://www.springframework.org/security/tags"
+                
+                template="/WEB-INF/layouts/abstract/objectsList.xhtml">
+    
+    <ui:define name="leftToolbar">
+        <p:commandButton 
+            value="View" icon="ui-icon-search" action="objectSummary" disabled="#{empty flowScope.selectedObject}" ajax="false" />
+        
+        <p:separator rendered="#{hasChildren || hasParent}" />
+        
+        <p:commandButton 
+            value="#{parentType}" icon="ui-icon-arrowreturnthick-1-n" action="parentSummary" 
+            disabled="#{empty flowScope.selectedObject}" ajax="false" rendered="#{hasParent}" />
+            
+        <p:commandButton 
+            value="#{childrenTypePlural}" icon="ui-icon-arrowreturnthick-1-e" action="childrenList" 
+            disabled="#{empty flowScope.selectedObject}" ajax="false" rendered="#{hasChildren}" />
+    </ui:define>
+    
+</ui:composition>

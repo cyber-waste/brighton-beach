@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:s="http://www.springframework.org/security/tags"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                
+                template="/WEB-INF/layouts/general.xhtml">
+    
+    <ui:param name="title" value="#{objectType} &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="panelTitle" value="#{objectType} &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="title" value="#{ empty flowScope.selectedObject.id ? 'New '.concat(objectType) : title }" />
+    <ui:param name="panelTitle" value="#{ empty flowScope.selectedObject.id ? 'New '.concat(objectType) : panelTitle }" />
+    
+    <ui:define name="leftToolbar">
+        <p:commandButton value="#{objectTypePlural}" action="objectsList" icon="ui-icon-arrowreturnthick-1-w" process="@this" />
+        <p:separator />
+        
+        <p:commandButton 
+            value="Add Property" icon="ui-icon-plus" ajax="true" rendered="#{hasProperties}" 
+            actionListener="#{propertyService.add(properties)}" 
+            update=":centerForm:propertiesTable" process="@this,:centerForm:propertiesTable" />
+        <p:commandButton 
+            value="Delete Property" icon="ui-icon-minus" ajax="true" rendered="#{hasProperties}" 
+            actionListener="#{propertyService.remove(properties, selectedProperty)}" 
+            update=":centerForm:propertiesTable" process="@this,:centerForm:propertiesTable" />
+        <p:separator rendered="#{hasProperties}" />
+        
+        <p:commandButton value="Save" action="saveObject" icon="ui-icon-check" ajax="false"/>
+    </ui:define>
+
+    <ui:define name="center">
+    
+        <p:panelGrid>
+            
+            <p:row>
+                <p:column styleClass="edw-top-aligment">
+                
+                    <p:panel header="Summary" styleClass="edw-noborder">
+                        <h:panelGrid id="editPanel" columns="3">
+                            <ui:insert name="objectFields" />
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                </p:column>
+            
+            </p:row>
+            
+            <ui:insert name="additionalManagementObjects" />
+            
+        </p:panelGrid>
+
+    </ui:define>
+
+</ui:composition>

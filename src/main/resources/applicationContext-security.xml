@@ -11,7 +11,7 @@
         <security:form-login 
             login-page="/spring/login" 
             login-processing-url="/spring/loginProcess" 
-            default-target-url="/spring/underConstruction" 
+            default-target-url="/spring/cards" 
             authentication-failure-url="/spring/login?login_error=1" />
         
         <security:logout logout-url="/spring/logout" logout-success-url="/spring/loggedout" delete-cookies="JSESSIONID"/>

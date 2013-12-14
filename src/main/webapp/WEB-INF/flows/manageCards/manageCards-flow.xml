@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+            http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      
+      start-state="cards">
+    
+    <secured attributes="ROLE_ADMIN"/>
+    
+    <var name="flowScope.selectedObject" class="cyberwaste.brightonbeach.domain.Card" />
+    
+    <on-start>
+        <set name="flowScope.specification" value="T(cyberwaste.brightonbeach.specification.CardSpecifications).any()" />
+    </on-start>
+    
+    <view-state id="cards">
+        <on-entry>
+            <set name="flowScope.selectedObject" value="null" />
+            <evaluate expression="cardService.findSpecified(flowScope.specification)" result="viewScope.specifiedObjects" />
+        </on-entry>
+        
+        <transition on="applyFilter" to="cards">
+            <set 
+                name="flowScope.specification" 
+                value="T(cyberwaste.brightonbeach.specification.CardSpecifications).withNameContains(flowScope.filteringCardName)" />
+        </transition>
+        
+        <transition on="cancelFiltering" to="cards">
+            <set name="flowScope.specification" value="T(cyberwaste.brightonbeach.specification.CardSpecifications).any()" />
+            <set name="flowScope.filteringCardName" value="''" />
+        </transition>
+        
+        <transition on="editObject" to="cardEditor"/>
+        
+        <transition on="deleteObject" to="cards">
+            <evaluate expression="cardService.delete(flowScope.selectedObject, messageContext)" />
+        </transition>
+        
+        <transition on="newObject" to="cardEditor">
+            <set name="flowScope.selectedObject" value="cardService.create()" />
+        </transition>
+    </view-state>
+    
+    <view-state id="cardEditor">
+        <transition on="objectsList" to="cards" />
+        
+        <transition on="saveObject" to="cards">
+            <evaluate expression="cardService.save(flowScope.selectedObject, messageContext)" />
+        </transition>
+    </view-state>
+    
+</flow>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:s="http://www.springframework.org/security/tags"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                
+                template="/WEB-INF/layouts/managing/objectEditor.xhtml">
+    
+    <ui:param name="objectType" value="Card" />
+    <ui:param name="objectTypePlural" value="Cards" />
+    <ui:param name="hasProperties" value="false" />
+    
+    <ui:define name="objectFields">
+        
+        <p:outputLabel for="id" value="Id" rendered="#{flowScope.selectedObject.id != null}" />
+        <p:inputText
+            id="id" value="#{flowScope.selectedObject.id}" readonly="true" size="80" rendered="#{flowScope.selectedObject.id != null}" />
+        <p:message for="id" rendered="#{flowScope.selectedObject.id != null}" />
+        
+        <p:outputLabel for="name" value="Name" />
+        <p:inputText id="name" value="#{flowScope.selectedObject.name}" size="80" />
+        <p:message for="name"/>
+        
+    </ui:define>
+    
+</ui:composition>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:s="http://www.springframework.org/security/tags"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                
+                template="/WEB-INF/layouts/general.xhtml">
+    
+    <ui:param name="title" value="#{objectType} &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="panelTitle" value="#{not empty objectFullName ? objectFullName : title}" />
+    
+    <ui:define name="leftToolbar">
+        <p:commandButton value="Back" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
+        <p:separator />
+        <p:commandButton 
+            value="View #{childrenType}" icon="ui-icon-arrowreturnthick-1-e" action="childrenSummary" ajax="false" 
+            rendered="#{hasChildren}" disabled="#{empty flowScope.selectedChild}" />
+    </ui:define>
+    
+    <ui:define name="center">
+        
+        <p:panelGrid>
+            
+            <p:row>
+                <p:column styleClass="edw-top-aligment">
+                
+                    <p:panel header="Summary" styleClass="edw-noborder">
+                        <h:panelGrid id="editPanel" columns="2">
+                            <ui:insert name="objectFields" />
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                </p:column>
+            </p:row>
+            
+            <ui:insert name="additionalInformation" />
+            
+            <p:row>
+                <p:column colspan="2" styleClass="edw-top-aligment">
+                
+                    <p:panel header="#{childrenTypePlural}" rendered="#{hasChildren}">
+                        <ui:insert name="children" />
+                    </p:panel>
+                    
+                </p:column>
+            </p:row>
+            
+        </p:panelGrid>
+        
+    </ui:define>
+    
+</ui:composition>

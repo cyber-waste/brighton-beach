@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+          http://www.springframework.org/schema/webflow
+          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      
+      start-state="cards">
+    
+    <secured match="any" attributes="ROLE_USER,ROLE_ADMIN"/>
+    
+    <var name="flowScope.selectedObject" class="cyberwaste.brightonbeach.domain.Card" />
+    
+    <view-state id="cards">
+        <on-entry>
+            <set name="flowScope.selectedObject" value="null" />
+            <evaluate expression="cardService.findSpecified(flowScope.specification)" result="viewScope.specifiedObjects" />
+        </on-entry>
+        
+        <transition on="applyFilter" to="cards">
+            <set 
+                name="flowScope.specification" 
+                value="T(cyberwaste.brightonbeach.specification.CardSpecifications).withNameContains(flowScope.filteringCardName)" />
+        </transition>
+        
+        <transition on="cancelFiltering" to="cards">
+            <set name="flowScope.specification" value="T(cyberwaste.brightonbeach.specification.CardSpecifications).any()" />
+            <set name="flowScope.filteringCardName" value="''" />
+        </transition>
+        
+        <transition on="objectSummary" to="cardSummary" />
+        <transition on="childrenList" to="appliesForCard" />
+    </view-state>
+    
+    <subflow-state id="cardSummary" subflow="cardSummary">
+        <input name="card" value="flowScope.selectedObject" />
+        <transition to="cards" />
+    </subflow-state>
+    
+    <subflow-state id="appliesForCard" subflow="applies">
+        <input name="inputExactCard" value="flowScope.selectedObject" />
+        <transition to="cards" />
+    </subflow-state>
+    
+</flow>
