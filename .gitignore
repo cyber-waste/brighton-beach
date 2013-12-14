@@ -19,6 +19,7 @@ tomcat/webapps/brighton-beach.war
 !tomcat/LICENSE
 !tomcat/NOTICE
 !tomcat/RELEASE-NOTES
+!tomcat/.gitattributes
 
 /build
 /bin
