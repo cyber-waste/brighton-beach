@@ -31,7 +31,7 @@ public class Card  implements Serializable {
     
     @Basic(optional = false)
     @NotNull
-    @Size(min = 10, max = 500)
+    @Size(max = 40)
     @Column(name = "name", unique=true)
     private String name;
 

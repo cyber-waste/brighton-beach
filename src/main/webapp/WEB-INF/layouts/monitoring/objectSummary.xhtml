@@ -27,9 +27,9 @@
         <p:panelGrid>
             
             <p:row>
-                <p:column styleClass="edw-top-aligment">
+                <p:column styleClass="bb-top-aligment">
                 
-                    <p:panel header="Summary" styleClass="edw-noborder">
+                    <p:panel header="Summary" styleClass="bb-noborder">
                         <h:panelGrid id="editPanel" columns="2">
                             <ui:insert name="objectFields" />
                         </h:panelGrid>
@@ -41,7 +41,7 @@
             <ui:insert name="additionalInformation" />
             
             <p:row>
-                <p:column colspan="2" styleClass="edw-top-aligment">
+                <p:column colspan="2" styleClass="bb-top-aligment">
                 
                     <p:panel header="#{childrenTypePlural}" rendered="#{hasChildren}">
                         <ui:insert name="children" />
