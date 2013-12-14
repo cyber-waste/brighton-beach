@@ -21,5 +21,6 @@ tomcat/webapps/brighton-beach.war
 !tomcat/RELEASE-NOTES
 !tomcat/.gitattributes
 
-/build
-/bin
+# Environment #
+src/main/resources/env-datasource.properties
+
