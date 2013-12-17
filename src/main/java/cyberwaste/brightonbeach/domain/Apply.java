@@ -5,9 +5,12 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,8 +21,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 @Entity
-@Table(name = "card")
-public class Card implements Serializable {
+@Table(name = "apply")
+public class Apply implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -35,13 +38,17 @@ public class Card implements Serializable {
     @Column(name = "name", unique=true)
     private String name;
 
-    public Card() {}
+    @JoinColumn(name = "card_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Card card;
 
-    public Card(Long id) {
+    public Apply() {}
+
+    public Apply(Long id) {
         this.id = id;
     }
 
-    public Card(Long id, String name) {
+    public Apply(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -53,14 +60,22 @@ public class Card implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public Card getCard() {
+        return card;
+    }
+    
+    public void setCard(Card card) {
+        this.card = card;
+    }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (this == obj) return true;
         
-        if (!(obj instanceof Card)) return false;
-        Card other = (Card) obj;
+        if (!(obj instanceof Apply)) return false;
+        Apply other = (Apply) obj;
         
         EqualsBuilder equalsBuilder = new EqualsBuilder();
         equalsBuilder.append(this.id, other.id);

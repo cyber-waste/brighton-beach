@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+          http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      
+      start-state="cardSummary">
+      
+    <secured match="any" attributes="ROLE_USER,ROLE_ADMIN"/>
+    
+    <var name="flowScope.selectedObject" class="cyberwaste.brightonbeach.domain.Card" />
+    
+    <input name="card" type="cyberwaste.brightonbeach.domain.Card" required="true" />
+    
+    <on-start>
+        <set name="flowScope.selectedObject" value="card" />
+    </on-start>
+    
+    <view-state id="cardSummary">
+        <on-entry>
+            <set name="flowScope.selectedChild" value="null" />
+            
+            <evaluate 
+                expression="applyService.lazyModel(T(cyberwaste.brightonbeach.specification.ApplySpecifications).ofCard(flowScope.selectedObject))" 
+                result="viewScope.childrenLazyModel"/>
+        </on-entry>
+        
+        <transition on="exitSummary" to="flowExit" />
+        <transition on="childrenSummary" to="applySummary" />
+    </view-state>
+     
+    <subflow-state id="applySummary" subflow="applySummary">
+        <input name="apply" value="flowScope.selectedChild" />
+        <transition to="cardSummary" />
+    </subflow-state>
+    
+    <end-state id="flowExit" />
+    
+</flow>

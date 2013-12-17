@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:s="http://www.springframework.org/security/tags"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                
+                template="/WEB-INF/layouts/monitoring/objectSummary.xhtml">
+    
+    <ui:param name="objectType" value="Card" />
+    <ui:param name="objectTypePlural" value="Cards" />
+    
+    <ui:param name="childrenType" value="Apply" />
+    <ui:param name="childrenTypePlural" value="Applies" />
+    <ui:param name="hasChildren" value="true" />
+    
+    <ui:define name="objectFields">
+        
+        <p:outputLabel for="id" value="Id" />
+        <p:inputText id="id" readonly="true" value="#{flowScope.selectedObject.id}" size="80" />
+        
+        <p:outputLabel for="name" value="Name" />
+        <p:inputText id="name" readonly="true" value="#{flowScope.selectedObject.name}" size="80" />
+        
+    </ui:define>
+    
+    <ui:define name="children">
+        
+        <p:dataTable 
+                id="childrenTable" widgetVar="childrenTable" value="#{childrenLazyModel}" var="child" lazy="true" 
+                selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" paginator="true" 
+                rows="10" rowsPerPageTemplate="5,10,15" 
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+            
+            <!-- to enable/disable "View" button on row selection or movement to another page  --> 
+            <p:ajax event="rowSelect" update=":centerForm:toolBar" />
+            <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
+            <p:ajax event="page"
+                onstart="childrenTableBlocker.show(); childrenTable.unselectAllRows()"
+                oncomplete="childrenTableBlocker.hide()" 
+                update=":centerForm:toolBar" />
+            
+            <p:column headerText="Id">
+                <h:outputText value="#{child.id}" />
+            </p:column>
+            
+            <p:column headerText="Name">
+                <h:outputText value="#{child.name}" />
+            </p:column>
+            
+        </p:dataTable>
+        
+        <p:blockUI block="childrenTable" widgetVar="childrenTableBlocker">
+            <p:graphicImage value="/images/ajax-loader.gif" />
+        </p:blockUI>
+        
+    </ui:define>
+     -->
+</ui:composition>
