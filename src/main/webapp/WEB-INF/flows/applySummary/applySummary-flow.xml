@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      
+      start-state="applySummary">
+    
+    <secured match="any" attributes="ROLE_USER,ROLE_ADMIN"/>
+    
+    <var name="flowScope.selectedObject" class="cyberwaste.brightonbeach.domain.Apply" />
+    
+    <input name="apply" type="cyberwaste.brightonbeach.domain.Apply" required="true" />
+    
+    <on-start>
+        <set name="flowScope.selectedObject" value="apply" />
+    </on-start>
+    
+    <view-state id="applySummary">
+        <on-entry>
+            <set name="flowScope.selectedChild" value="null" />
+        </on-entry>
+        
+        <transition on="exitSummary" to="flowExit" />
+    </view-state>
+    
+    <end-state id="flowExit" />
+    
+</flow>
