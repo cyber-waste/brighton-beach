@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:s="http://www.springframework.org/security/tags"
+                
+                template="/WEB-INF/layouts/monitoring/objectsList.xhtml">
+
+    <ui:param name="objectType" value="Apply" />
+    <ui:param name="objectTypePlural" value="Applies" />
+    
+    <ui:param name="title" value="#{flowScope.exactCard != null ? 'Applies for '.concat(flowScope.exactCard.name) : 'Applies'}" />
+    <ui:param name="panelTitle" value="#{flowScope.exactCard != null ? 'Applies for '.concat(flowScope.exactCard.name) : 'Applies'}" />
+    
+    <ui:param name="hasParent" value="true" />
+    <ui:param name="parentType" value="Card" />
+    
+    <ui:define name="filteringFields">
+        <p:outputLabel for="cardName" value="Card name" />
+        <p:inputText id="cardName" value="#{flowScope.filteringCardName}" disabled="#{flowScope.exactCard != null}"/>
+    </ui:define>
+    
+    <ui:define name="center">
+        
+        <p:dataTable 
+                id="objectsTable" widgetVar="objectsTable" value="#{flowScope.specifiedLazyModel}" var="object" lazy="true" 
+                selection="#{flowScope.selectedObject}" rowKey="#{object.id}" selectionMode="single" paginator="true" rows="15" 
+                rowsPerPageTemplate="10,15,30" 
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+            
+            <!-- to enable/disable "View" button on row selection or movement to another page  -->
+            <p:ajax event="rowSelect" update=":centerForm:toolBar" />
+            <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
+            <p:ajax event="page"
+                onstart="objectsTableBlocker.show(); objectsTable.unselectAllRows()"
+                oncomplete="objectsTableBlocker.hide()" 
+                update=":centerForm:toolBar" />
+            
+            <p:column headerText="Id">
+                <h:outputText value="#{object.id}" />
+            </p:column>
+            
+            <p:column headerText="Card Name">
+                <h:outputText value="#{object.card.name}" />
+            </p:column>
+            
+        </p:dataTable>
+        
+        <p:blockUI block="objectsTable" widgetVar="objectsTableBlocker">
+            <p:graphicImage value="/images/ajax-loader.gif" />
+        </p:blockUI>
+        
+    </ui:define>
+    
+</ui:composition>
