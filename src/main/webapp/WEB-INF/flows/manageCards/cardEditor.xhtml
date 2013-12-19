@@ -8,23 +8,48 @@
                 xmlns:s="http://www.springframework.org/security/tags"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 
-                template="/WEB-INF/layouts/managing/objectEditor.xhtml">
+                template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="objectType" value="Card" />
-    <ui:param name="objectTypePlural" value="Cards" />
-    <ui:param name="hasProperties" value="false" />
+    <ui:param name="title" value="Card &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="panelTitle" value="Card &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="title" value="#{ empty flowScope.selectedObject.id ? 'New Card' : title }" />
+    <ui:param name="panelTitle" value="#{ empty flowScope.selectedObject.id ? 'New Card' : panelTitle }" />
     
-    <ui:define name="objectFields">
+    <ui:define name="leftToolbar">
+        <p:commandButton value="Cards" action="objectsList" icon="ui-icon-arrowreturnthick-1-w" process="@this" />
         
-        <p:outputLabel for="id" value="Id" rendered="#{flowScope.selectedObject.id != null}" />
-        <p:inputText
-            id="id" value="#{flowScope.selectedObject.id}" readonly="true" size="80" rendered="#{flowScope.selectedObject.id != null}" />
-        <p:message for="id" rendered="#{flowScope.selectedObject.id != null}" />
+        <p:separator />
         
-        <p:outputLabel for="name" value="Name" />
-        <p:inputText id="name" value="#{flowScope.selectedObject.name}" size="80" />
-        <p:message for="name"/>
-        
+        <p:commandButton value="Save" action="saveObject" icon="ui-icon-check" ajax="false"/>
     </ui:define>
+
+    <ui:define name="center">
     
+        <p:panelGrid>
+            
+            <p:row>
+                <p:column styleClass="bb-top-aligment">
+                
+                    <p:panel header="Summary" styleClass="bb-noborder">
+                        <h:panelGrid id="editPanel" columns="3">
+                            
+                            <p:outputLabel for="id" value="Id" rendered="#{flowScope.selectedObject.id != null}" />
+                            <p:inputText
+                                id="id" value="#{flowScope.selectedObject.id}" readonly="true" size="80" rendered="#{flowScope.selectedObject.id != null}" />
+                            <p:message for="id" rendered="#{flowScope.selectedObject.id != null}" />
+                            
+                            <p:outputLabel for="name" value="Name" />
+                            <p:inputText id="name" value="#{flowScope.selectedObject.name}" size="80" />
+                            <p:message for="name"/>
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                </p:column>
+            
+            </p:row>
+            
+        </p:panelGrid>
+
+    </ui:define>
+
 </ui:composition>

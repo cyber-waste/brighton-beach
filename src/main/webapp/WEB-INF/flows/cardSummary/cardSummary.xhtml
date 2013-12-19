@@ -8,55 +8,75 @@
                 xmlns:s="http://www.springframework.org/security/tags"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 
-                template="/WEB-INF/layouts/monitoring/objectSummary.xhtml">
+                template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="objectType" value="Card" />
-    <ui:param name="objectTypePlural" value="Cards" />
+    <ui:param name="title" value="Card &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="panelTitle" value="Card" />
     
-    <ui:param name="childrenType" value="Apply" />
-    <ui:param name="childrenTypePlural" value="Applies" />
-    <ui:param name="hasChildren" value="true" />
+    <ui:define name="leftToolbar">
+        <p:commandButton value="Back" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
+        <p:separator />
+        <p:commandButton 
+            value="View Apply" icon="ui-icon-arrowreturnthick-1-e" action="childrenSummary" ajax="false" 
+            disabled="#{empty flowScope.selectedChild}" />
+    </ui:define>
     
-    <ui:define name="objectFields">
+    <ui:define name="center">
         
-        <p:outputLabel for="id" value="Id" />
-        <p:inputText id="id" readonly="true" value="#{flowScope.selectedObject.id}" size="80" />
+        <p:panelGrid>
+            
+            <p:row>
+                <p:column styleClass="bb-top-aligment">
+                
+                    <p:panel header="Summary" styleClass="bb-noborder">
+                        <h:panelGrid id="editPanel" columns="2">
+                            <p:outputLabel for="id" value="Id" />
+                            <p:inputText id="id" readonly="true" value="#{flowScope.selectedObject.id}" size="80" />
+                            
+                            <p:outputLabel for="name" value="Name" />
+                            <p:inputText id="name" readonly="true" value="#{flowScope.selectedObject.name}" size="80" />
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                </p:column>
+                
+                <p:column colspan="2" styleClass="bb-top-aligment">
+                
+                    <p:panel header="Applies">
+                        <p:dataTable 
+                                id="childrenTable" widgetVar="childrenTable" value="#{childrenLazyModel}" var="child" 
+                                lazy="true" selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" 
+                                paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                            
+                            <!-- to enable/disable "View" button on row selection or movement to another page  -->
+                            <p:ajax event="rowSelect" update=":centerForm:toolBar" />
+                            <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
+                            <p:ajax event="page"
+                                onstart="childrenTableBlocker.show(); childrenTable.unselectAllRows()"
+                                oncomplete="childrenTableBlocker.hide()" 
+                                update=":centerForm:toolBar" />
+                            
+                            <p:column headerText="Id">
+                                <h:outputText value="#{child.id}" />
+                            </p:column>
+                            
+                            <p:column headerText="Name">
+                                <h:outputText value="#{child.name}" />
+                            </p:column>
+                            
+                        </p:dataTable>
         
-        <p:outputLabel for="name" value="Name" />
-        <p:inputText id="name" readonly="true" value="#{flowScope.selectedObject.name}" size="80" />
+                        <p:blockUI block="childrenTable" widgetVar="childrenTableBlocker">
+                            <p:graphicImage value="/images/ajax-loader.gif" />
+                        </p:blockUI>
+                    </p:panel>
+                    
+                </p:column>
+            </p:row>
+            
+        </p:panelGrid>
         
     </ui:define>
     
-    <ui:define name="children">
-        
-        <p:dataTable 
-                id="childrenTable" widgetVar="childrenTable" value="#{childrenLazyModel}" var="child" lazy="true" 
-                selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" paginator="true" 
-                rows="10" rowsPerPageTemplate="5,10,15" 
-                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-            
-            <!-- to enable/disable "View" button on row selection or movement to another page  --> 
-            <p:ajax event="rowSelect" update=":centerForm:toolBar" />
-            <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
-            <p:ajax event="page"
-                onstart="childrenTableBlocker.show(); childrenTable.unselectAllRows()"
-                oncomplete="childrenTableBlocker.hide()" 
-                update=":centerForm:toolBar" />
-            
-            <p:column headerText="Id">
-                <h:outputText value="#{child.id}" />
-            </p:column>
-            
-            <p:column headerText="Name">
-                <h:outputText value="#{child.name}" />
-            </p:column>
-            
-        </p:dataTable>
-        
-        <p:blockUI block="childrenTable" widgetVar="childrenTableBlocker">
-            <p:graphicImage value="/images/ajax-loader.gif" />
-        </p:blockUI>
-        
-    </ui:define>
-     -->
 </ui:composition>

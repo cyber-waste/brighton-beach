@@ -7,29 +7,51 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:s="http://www.springframework.org/security/tags"
                 
-                template="/WEB-INF/layouts/monitoring/objectsList.xhtml">
+                template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="objectType" value="Card" />
-    <ui:param name="objectTypePlural" value="Cards" />
+    <ui:param name="title" value="Cards" />
+    <ui:param name="panelTitle" value="Cards" />
     
-    <ui:define name="filteringFields">
+    <ui:define name="rightToolbar">
+        <p:outputLabel value="Filtering:"/>
+        
         <p:outputLabel for="cardName" value="Name" />
         <p:inputText id="cardName" value="#{flowScope.filteringCardName}" />
+        
+        <p:commandButton value="Apply Filter" action="applyFilter" icon="ui-icon-search" ajax="false" />
+        <p:commandButton value="Reset Filter" action="cancelFiltering" icon="ui-icon-close" process="@this" />
     </ui:define>
     
-    <ui:param name="hasChildren" value="true" />
-    <ui:param name="childrenTypePlural" value="Applies" />
+    <ui:define name="center">
+        
+        <p:dataTable
+                id="objectsTable" value="#{specifiedObjects}" var="object" selection="#{flowScope.selectedObject}" 
+                rowKey="#{object.id}" selectionMode="single" scrollable="true" scrollHeight="300" resizableColumns="true">
+                
+            <p:ajax event="rowSelect" update=":centerForm:toolBar" />
+            <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
+            
+            <p:column headerText="Id" width="50">
+                <h:outputText value="#{object.id}" />
+            </p:column>
+            
+            <p:column headerText="Name" width="300">
+                <h:outputText value="#{object.name}" />
+            </p:column>
+            
+        </p:dataTable>
+        
+    </ui:define>
     
-    <ui:define name="objectFields">
+    <ui:define name="leftToolbar">
+        <p:commandButton 
+            value="View" icon="ui-icon-search" action="objectSummary" disabled="#{empty flowScope.selectedObject}" ajax="false" />
         
-        <p:column headerText="Id" width="50">
-            <h:outputText value="#{object.id}" />
-        </p:column>
-        
-        <p:column headerText="Name" width="300">
-            <h:outputText value="#{object.name}" />
-        </p:column>
-        
+        <p:separator />
+            
+        <p:commandButton 
+            value="Applies" icon="ui-icon-arrowreturnthick-1-e" action="childrenList" 
+            disabled="#{empty flowScope.selectedObject}" ajax="false" />
     </ui:define>
     
 </ui:composition>

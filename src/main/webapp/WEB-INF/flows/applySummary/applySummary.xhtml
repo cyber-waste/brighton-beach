@@ -8,25 +8,44 @@
                 xmlns:s="http://www.springframework.org/security/tags"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 
-                template="/WEB-INF/layouts/monitoring/objectSummary.xhtml">
+                template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="objectType" value="Apply" />
-    <ui:param name="objectTypePlural" value="Applies" />
+    <ui:param name="title" value="Apply &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="panelTitle" value="Card &quot;#{flowScope.selectedObject.card.name}&quot; :: Apply &quot;#{flowScope.selectedObject.name}&quot;" />
     
-    <ui:param name="objectFullName" value="Card &quot;#{flowScope.selectedObject.card.name}&quot; :: Apply &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:define name="leftToolbar">
+        <p:commandButton value="Back" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
+        <p:separator />
+        <p:commandButton 
+            value="View #{childrenType}" icon="ui-icon-arrowreturnthick-1-e" action="childrenSummary" ajax="false" 
+            rendered="#{hasChildren}" disabled="#{empty flowScope.selectedChild}" />
+    </ui:define>
     
-    <ui:param name="hasChildren" value="false" />
-    
-    <ui:define name="objectFields">
+    <ui:define name="center">
         
-        <p:outputLabel for="id" value="Id" />
-        <p:inputText id="id" readonly="true" value="#{flowScope.selectedObject.id}" size="80" />
+        <p:panelGrid>
+            
+            <p:row>
+                <p:column styleClass="bb-top-aligment">
+                
+                    <p:panel header="Summary" styleClass="bb-noborder">
+                        <h:panelGrid id="editPanel" columns="2">
+                            <p:outputLabel for="id" value="Id" />
+                            <p:inputText id="id" readonly="true" value="#{flowScope.selectedObject.id}" size="80" />
         
-        <p:outputLabel for="card" value="Card" />
-        <p:inputText id="card" readonly="true" value="#{flowScope.selectedObject.card.name}" size="80" />
+                            <p:outputLabel for="card" value="Card" />
+                            <p:inputText id="card" readonly="true" value="#{flowScope.selectedObject.card.name}" size="80" />
         
-        <p:outputLabel for="name" value="Name" />
-        <p:inputTextarea id="name" readonly="true" value="#{flowScope.selectedObject.name}" style="width:98%" />
+                            <p:outputLabel for="name" value="Name" />
+                            <p:inputTextarea id="name" readonly="true" value="#{flowScope.selectedObject.name}" style="width:98%" />
+        
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                </p:column>
+            </p:row>
+            
+        </p:panelGrid>
         
     </ui:define>
     
