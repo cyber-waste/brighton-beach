@@ -17,8 +17,11 @@
         <p:commandButton value="Back" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
         <p:separator />
         <p:commandButton 
-            value="View #{childrenType}" icon="ui-icon-arrowreturnthick-1-e" action="childrenSummary" ajax="false" 
-            rendered="#{hasChildren}" disabled="#{empty flowScope.selectedChild}" />
+            value="Accept" icon="ui-icon-check" action="acceptApply" ajax="false" 
+            rendered="#{flowScope.selectedObject.state eq 'OPEN'}" />
+        <p:commandButton 
+            value="Reject" icon="ui-icon-close" action="rejectApply" ajax="false" 
+            rendered="#{flowScope.selectedObject.state eq 'OPEN'}" />
     </ui:define>
     
     <ui:define name="center">

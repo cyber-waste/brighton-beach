@@ -10,5 +10,9 @@ import cyberwaste.brightonbeach.web.model.AppliesLazyModel;
 public interface ApplyService {
     
     AppliesLazyModel lazyModel(SerializableSpecification<Apply> specification);
+    
     void makeApplyForCard(String username, Card card, MessageContext messageContext);
+
+    void acceptApply(Apply apply, MessageContext messageContext);
+    void rejectApply(Apply apply, MessageContext messageContext);
 }

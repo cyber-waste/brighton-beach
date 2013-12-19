@@ -29,16 +29,10 @@
         </transition>
         
         <transition on="objectSummary" to="cardSummary" />
-        <transition on="childrenList" to="appliesForCard" />
     </view-state>
     
     <subflow-state id="cardSummary" subflow="cardSummary">
         <input name="card" value="flowScope.selectedObject" />
-        <transition to="cards" />
-    </subflow-state>
-    
-    <subflow-state id="appliesForCard" subflow="applies">
-        <input name="inputExactCard" value="flowScope.selectedObject" />
         <transition to="cards" />
     </subflow-state>
     

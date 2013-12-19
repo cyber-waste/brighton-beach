@@ -33,6 +33,8 @@
         
         <transition on="editObject" to="cardEditor"/>
         
+        <transition on="appliesForCard" to="appliesForCard"/>
+        
         <transition on="deleteObject" to="cards">
             <evaluate expression="cardService.delete(flowScope.selectedObject, messageContext)" />
         </transition>
@@ -49,5 +51,10 @@
             <evaluate expression="cardService.save(flowScope.selectedObject, messageContext)" />
         </transition>
     </view-state>
+    
+    <subflow-state id="appliesForCard" subflow="adminAppliesList">
+        <input name="inputExactCard" value="flowScope.selectedObject" />
+        <transition to="cards" />
+    </subflow-state>
     
 </flow>

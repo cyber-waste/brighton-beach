@@ -50,6 +50,12 @@
             value="Delete" oncomplete="deleteDialog.show()" update=":deleteContainer" icon="ui-icon-trash" 
             disabled="#{empty flowScope.selectedObject}" />
         <p:commandButton value="Edit" action="editObject" icon="ui-icon-pencil" disabled="#{empty flowScope.selectedObject}" ajax="false"/>
+        
+        <p:separator />
+            
+        <p:commandButton 
+            value="Applies" icon="ui-icon-arrowreturnthick-1-e" action="appliesForCard"
+            disabled="#{empty flowScope.selectedObject}" ajax="false" />
     </ui:define>
     
     <ui:define name="dialogs">

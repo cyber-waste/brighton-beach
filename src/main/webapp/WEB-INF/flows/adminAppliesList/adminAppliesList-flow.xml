@@ -6,7 +6,7 @@
           
           start-state="applies">
     
-    <secured match="any" attributes="ROLE_USER,ROLE_ADMIN"/>
+    <secured match="any" attributes="ROLE_ADMIN"/>
     
     <var name="flowScope.selectedApply" class="cyberwaste.brightonbeach.domain.Apply" />
     
@@ -46,7 +46,7 @@
         <transition on="parentSummary" to="cardOfApply" />
     </view-state>
     
-    <subflow-state id="applySummary" subflow="applySummary">
+    <subflow-state id="applySummary" subflow="adminApplySummary">
         <input name="apply" value="flowScope.selectedObject" />
         <transition to="applies" />
     </subflow-state>

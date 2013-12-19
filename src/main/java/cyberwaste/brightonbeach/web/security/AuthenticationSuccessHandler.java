@@ -15,9 +15,9 @@ public class AuthenticationSuccessHandler implements org.springframework.securit
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException  {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_ADMIN")){
-            response.sendRedirect("manageCards");
+            response.sendRedirect("adminCardsList");
         } else if (roles.contains("ROLE_USER")){
-            response.sendRedirect("viewCards");
+            response.sendRedirect("userCardsList");
         } else {
             response.sendRedirect("underConstruction");
         }

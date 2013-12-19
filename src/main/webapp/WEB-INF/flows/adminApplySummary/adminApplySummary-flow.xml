@@ -5,7 +5,7 @@
       
       start-state="applySummary">
     
-    <secured match="any" attributes="ROLE_USER,ROLE_ADMIN"/>
+    <secured match="any" attributes="ROLE_ADMIN"/>
     
     <var name="flowScope.selectedObject" class="cyberwaste.brightonbeach.domain.Apply" />
     
@@ -16,9 +16,13 @@
     </on-start>
     
     <view-state id="applySummary">
-        <on-entry>
-            <set name="flowScope.selectedChild" value="null" />
-        </on-entry>
+        <transition on="acceptApply" to="applySummary">
+            <evaluate expression="applyService.acceptApply(flowScope.selectedObject, messageContext)" />
+        </transition>
+        
+        <transition on="rejectApply" to="applySummary">
+            <evaluate expression="applyService.rejectApply(flowScope.selectedObject, messageContext)" />
+        </transition>
         
         <transition on="exitSummary" to="flowExit" />
     </view-state>

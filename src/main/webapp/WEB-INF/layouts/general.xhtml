@@ -33,18 +33,18 @@
                         <p:menuitem 
                             value="Home" icon="ui-icon-home" 
                             disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}"
-                            url="#{s:areAnyGranted('ROLE_ADMIN') ? 'manageCards' : 'viewCards'}" />
+                            url="#{s:areAnyGranted('ROLE_ADMIN') ? 'adminCardsList' : 'userCardsList'}" />
                         
                         <p:submenu label="Cards" icon="ui-icon-bookmark">
                             <p:menuitem 
                                 value="View" disabled="#{s:areNotGranted('ROLE_USER')}" 
-                                url="viewCards" />
+                                url="userCardsList" />
                             
                             <p:separator />
                             
                             <p:menuitem 
                                 value="Manage" disabled="#{s:areNotGranted('ROLE_ADMIN')}" 
-                                url="manageCards" />
+                                url="adminCardsList" />
                         </p:submenu>
                             
                         <p:menuitem 

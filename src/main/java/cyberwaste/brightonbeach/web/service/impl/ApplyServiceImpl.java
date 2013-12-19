@@ -48,4 +48,54 @@ public class ApplyServiceImpl implements ApplyService {
             new MessageBuilder().info().defaultText("Apply for card \"" + card.getName() + "\" was made").build()
         );
     }
+    
+    @Override
+    public void acceptApply(Apply apply, MessageContext messageContext) {
+        if (apply.getState().equals(ApplyState.OPEN.name())) {
+            apply.applyState(ApplyState.ACCEPTED);
+            
+            applyRepository.save(apply);
+            
+            messageContext.addMessage(
+                new MessageBuilder()
+                    .info()
+                    .defaultText("Apply for card \"" + apply.getCard().getName() + "\" for user " 
+                            + apply.getUser().getName() + " was accepted")
+                    .build()
+            );
+        } else {
+            messageContext.addMessage(
+                new MessageBuilder()
+                    .error()
+                    .defaultText("Apply for card \"" + apply.getCard().getName() + "\" for user " 
+                            + apply.getUser().getName() + " was already closed")
+                    .build()
+            );
+        }
+    }
+    
+    @Override
+    public void rejectApply(Apply apply, MessageContext messageContext) {
+        if (apply.getState().equals(ApplyState.OPEN.name())) {
+            apply.applyState(ApplyState.REJECTED);
+            
+            applyRepository.save(apply);
+            
+            messageContext.addMessage(
+                new MessageBuilder()
+                    .info()
+                    .defaultText("Apply for card \"" + apply.getCard().getName() + "\" for user " 
+                            + apply.getUser().getName() + " was accepted")
+                    .build()
+            );
+        } else {
+            messageContext.addMessage(
+                new MessageBuilder()
+                    .error()
+                    .defaultText("Apply for card \"" + apply.getCard().getName() + "\" for user " 
+                            + apply.getUser().getName() + " was already closed")
+                    .build()
+            );
+        }
+    }
 }
