@@ -19,6 +19,8 @@
         <p:commandButton 
             value="View Apply" icon="ui-icon-arrowreturnthick-1-e" action="childrenSummary" ajax="false" 
             disabled="#{empty flowScope.selectedChild}" />
+        <p:separator />
+        <p:commandButton value="Make Apply" icon="ui-icon-cart" action="makeApply" ajax="false" />
     </ui:define>
     
     <ui:define name="center">

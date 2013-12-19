@@ -25,6 +25,10 @@
                 result="viewScope.childrenLazyModel"/>
         </on-entry>
         
+        <transition on="makeApply" to="cardSummary">
+            <evaluate expression="applyService.makeApplyForCard(flowScope.selectedObject, messageContext)" />
+        </transition>
+        
         <transition on="exitSummary" to="flowExit" />
         <transition on="childrenSummary" to="applySummary" />
     </view-state>
