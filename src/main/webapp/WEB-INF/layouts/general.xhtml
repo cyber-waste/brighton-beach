@@ -32,13 +32,13 @@
                     <p:menubar autoDisplay="false" styleClass="bb-title-menu" >
                         <p:menuitem 
                             value="Home" icon="ui-icon-home" 
-                            disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}" 
-                            url="cards" />
+                            disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}"
+                            url="#{s:areAnyGranted('ROLE_ADMIN') ? 'manageCards' : 'viewCards'}" />
                         
                         <p:submenu label="Cards" icon="ui-icon-bookmark">
                             <p:menuitem 
-                                value="Monitor" disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}" 
-                                url="cards" />
+                                value="View" disabled="#{s:areNotGranted('ROLE_USER')}" 
+                                url="viewCards" />
                             
                             <p:separator />
                             
@@ -48,8 +48,7 @@
                         </p:submenu>
                             
                         <p:menuitem 
-                            value="Logout" icon="ui-icon-close" 
-                            rendered="#{not empty currentUser.name}" url="logout"/>
+                            value="Logout" icon="ui-icon-close" rendered="#{not empty currentUser.name}" url="logout"/>
                     </p:menubar>
                     
                     <h:panelGroup style="color: white;font-size: 80%;">

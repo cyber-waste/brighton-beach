@@ -7,7 +7,7 @@
       
       start-state="cards">
     
-    <secured match="any" attributes="ROLE_USER,ROLE_ADMIN"/>
+    <secured match="any" attributes="ROLE_USER"/>
     
     <var name="flowScope.selectedObject" class="cyberwaste.brightonbeach.domain.Card" />
     
