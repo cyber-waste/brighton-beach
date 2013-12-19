@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import cyberwaste.brightonbeach.domain.Apply;
 import cyberwaste.brightonbeach.domain.Card;
+import cyberwaste.brightonbeach.domain.User;
 import cyberwaste.brightonbeach.repository.ApplyRepository;
+import cyberwaste.brightonbeach.repository.UserRepository;
 import cyberwaste.brightonbeach.specification.SerializableSpecification;
 import cyberwaste.brightonbeach.web.model.AppliesLazyModel;
 import cyberwaste.brightonbeach.web.service.ApplyService;
@@ -20,6 +22,9 @@ public class ApplyServiceImpl implements ApplyService {
     
     @Autowired
     private ApplyRepository applyRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public AppliesLazyModel lazyModel(SerializableSpecification<Apply> specification) {
@@ -27,9 +32,12 @@ public class ApplyServiceImpl implements ApplyService {
     }
     
     @Override
-    public void makeApplyForCard(Card card, MessageContext messageContext) {
+    public void makeApplyForCard(String username, Card card, MessageContext messageContext) {
+        User user = userRepository.findByName(username);
+        
         Apply apply = new Apply();
         apply.setName(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+        apply.setUser(user);
         apply.setCard(card);
         
         applyRepository.save(apply);

@@ -57,6 +57,10 @@
                 <h:outputText value="#{object.card.name}" />
             </p:column>
             
+            <p:column headerText="User Name">
+                <h:outputText value="#{object.user.name}" />
+            </p:column>
+            
         </p:dataTable>
         
         <p:blockUI block="objectsTable" widgetVar="objectsTableBlocker">

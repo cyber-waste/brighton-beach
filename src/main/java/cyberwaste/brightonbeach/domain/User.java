@@ -5,12 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,8 +18,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 @Entity
-@Table(name = "apply")
-public class Apply implements Serializable {
+@Table(name = "user")
+public class User implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -35,50 +32,48 @@ public class Apply implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(max = 40)
-    @Column(name = "name", unique=true)
+    @Column(name = "username", unique=true)
     private String name;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(max = 40)
+    @Column(name = "role", unique=true)
+    private String role;
 
-    @JoinColumn(name = "card_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Card card;
+    public User() {}
 
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private User user;
-
-    public Apply() {}
-
-    public Apply(Long id) {
+    public User(Long id) {
         this.id = id;
     }
 
-    public Apply(Long id, String name) {
+    public User(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+    
+    public Long getId() {
+        return id;
     }
     
     public void setId(Long id) {
         this.id = id;
     }
     
+    public String getName() {
+        return name;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
     
-    public Card getCard() {
-        return card;
+    public String getRole() {
+        return role;
     }
     
-    public void setCard(Card card) {
-        this.card = card;
-    }
-    
-    public User getUser() {
-        return user;
-    }
-    
-    public void setUser(User user) {
-        this.user = user;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -86,8 +81,8 @@ public class Apply implements Serializable {
         if (obj == null) return false;
         if (this == obj) return true;
         
-        if (!(obj instanceof Apply)) return false;
-        Apply other = (Apply) obj;
+        if (!(obj instanceof User)) return false;
+        User other = (User) obj;
         
         EqualsBuilder equalsBuilder = new EqualsBuilder();
         equalsBuilder.append(this.id, other.id);
@@ -104,17 +99,7 @@ public class Apply implements Serializable {
     @Override
     public String toString() {
         ToStringBuilder toStringBuilder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-        toStringBuilder.append("id", id).append("name", name);
+        toStringBuilder.append("id", id).append("name", name).append("role", role);
         return toStringBuilder.toString();
-    }
-    
-    // conventional getters
-    
-    public Long getId() {
-        return id;
-    }
-    
-    public String getName() {
-        return name;
     }
 }

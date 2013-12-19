@@ -67,6 +67,10 @@
                                 <h:outputText value="#{child.name}" />
                             </p:column>
                             
+                            <p:column headerText="User">
+                                <h:outputText value="#{child.user.name}" />
+                            </p:column>
+                            
                         </p:dataTable>
         
                         <p:blockUI block="childrenTable" widgetVar="childrenTableBlocker">
