@@ -45,6 +45,39 @@
                     </p:panel>
                     
                 </p:column>
+                
+                <p:column styleClass="bb-top-aligment">
+                
+                    <p:panel header="Attached files" styleClass="bb-noborder">
+                        <p:dataTable 
+                                id="childrenTable" widgetVar="childrenTable" value="#{children}" var="child" 
+                                selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" 
+                                paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                            
+                            <!-- to enable/disable "View" button on row selection or movement to another page  -->
+                            <p:ajax event="rowSelect" update=":centerForm:toolBar" />
+                            <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
+                            <p:ajax event="page"
+                                onstart="childrenTableBlocker.show(); childrenTable.unselectAllRows()" 
+                                oncomplete="childrenTableBlocker.hide()" update=":centerForm:toolBar" />
+                            
+                            <p:column headerText="Id">
+                                <h:outputText value="#{child.id}" />
+                            </p:column>
+                            
+                            <p:column headerText="Name">
+                                <h:outputText value="#{child.name}" />
+                            </p:column>
+                            
+                        </p:dataTable>
+                        
+                        <p:blockUI block="childrenTable" widgetVar="childrenTableBlocker">
+                            <p:graphicImage value="/images/ajax-loader.gif" />
+                        </p:blockUI>
+                    </p:panel>
+                    
+                </p:column>
             
             </p:row>
             
