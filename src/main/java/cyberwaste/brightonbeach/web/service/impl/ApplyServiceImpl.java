@@ -9,6 +9,7 @@ import org.springframework.binding.message.MessageContext;
 import org.springframework.stereotype.Service;
 
 import cyberwaste.brightonbeach.domain.Apply;
+import cyberwaste.brightonbeach.domain.ApplyState;
 import cyberwaste.brightonbeach.domain.Card;
 import cyberwaste.brightonbeach.domain.User;
 import cyberwaste.brightonbeach.repository.ApplyRepository;
@@ -39,6 +40,7 @@ public class ApplyServiceImpl implements ApplyService {
         apply.setName(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
         apply.setUser(user);
         apply.setCard(card);
+        apply.applyState(ApplyState.OPEN);
         
         applyRepository.save(apply);
         

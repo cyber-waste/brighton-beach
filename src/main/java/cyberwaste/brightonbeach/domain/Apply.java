@@ -37,6 +37,12 @@ public class Apply implements Serializable {
     @Size(max = 40)
     @Column(name = "name", unique=true)
     private String name;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(max = 40)
+    @Column(name = "state", unique=true)
+    private String state;
 
     @JoinColumn(name = "card_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
@@ -80,6 +86,14 @@ public class Apply implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+    
+    public String getState() {
+        return state;
+    }
+    
+    public void setState(String state) {
+        this.state = state;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -116,5 +130,11 @@ public class Apply implements Serializable {
     
     public String getName() {
         return name;
+    }
+    
+    // business methods
+    
+    public void applyState(ApplyState applyState) {
+        setState(applyState.name());
     }
 }

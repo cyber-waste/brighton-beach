@@ -61,6 +61,10 @@
                 <h:outputText value="#{object.user.name}" />
             </p:column>
             
+            <p:column headerText="State">
+                <h:outputText value="#{object.state}" />
+            </p:column>
+            
         </p:dataTable>
         
         <p:blockUI block="objectsTable" widgetVar="objectsTableBlocker">
