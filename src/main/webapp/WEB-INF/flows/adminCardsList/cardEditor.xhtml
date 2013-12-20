@@ -48,7 +48,7 @@
                 
                 <p:column styleClass="bb-top-aligment">
                 
-                    <p:panel header="Attached files" styleClass="bb-noborder">
+                    <p:panel id="filesPanel" header="Attached files" styleClass="bb-noborder">
                         <p:dataTable 
                                 id="childrenTable" widgetVar="childrenTable" value="#{files}" var="child" 
                                 selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" 
@@ -88,7 +88,8 @@
     <ui:define name="afterForm">
         <p:panel header="Upload file" styleClass="bb-noborder">
             <h:form enctype="multipart/form-data">
-                <p:fileUpload fileUploadListener="#{fileService.handleFileUpload}" />
+                <p:fileUpload 
+                    fileUploadListener="#{fileService.handleFileUpload}" auto="true" dragDropSupport="true" />
             </h:form>
         </p:panel>
     </ui:define>
