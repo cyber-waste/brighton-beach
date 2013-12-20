@@ -50,7 +50,7 @@
                 
                     <p:panel header="Attached files" styleClass="bb-noborder">
                         <p:dataTable 
-                                id="childrenTable" widgetVar="childrenTable" value="#{children}" var="child" 
+                                id="childrenTable" widgetVar="childrenTable" value="#{files}" var="child" 
                                 selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" 
                                 paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
@@ -83,6 +83,14 @@
             
         </p:panelGrid>
 
+    </ui:define>
+    
+    <ui:define name="afterForm">
+        <p:panel header="Upload file" styleClass="bb-noborder">
+            <h:form enctype="multipart/form-data">
+                <p:fileUpload fileUploadListener="#{fileService.handleFileUpload}" />
+            </h:form>
+        </p:panel>
     </ui:define>
 
 </ui:composition>

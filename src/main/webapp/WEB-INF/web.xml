@@ -31,28 +31,32 @@
         <param-value>cruze</param-value>
     </context-param>
     
+    <context-param>
+        <param-name>primefaces.UPLOADER</param-name>
+        <param-value>auto</param-value>
+    </context-param>
+    
     <!-- Declare Spring Security Facelets tag library -->
     <context-param>
         <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
         <param-value>/WEB-INF/springsecurity.taglib.xml</param-value>
     </context-param>
     
-    <!-- Enforce UTF-8 Character Encoding -->
     <filter>
-        <filter-name>charEncodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
         <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
+            <param-name>thresholdSize</param-name>
+            <param-value>51200</param-value>
         </init-param>
         <init-param>
-            <param-name>forceEncoding</param-name>
-            <param-value>true</param-value>
+            <param-name>uploadDirectory</param-name>
+            <param-value>F:\Development\eclipse_workspace\brighton-beach\data</param-value>
         </init-param>
     </filter>
-    
     <filter-mapping>
-        <filter-name>charEncodingFilter</filter-name>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     
@@ -61,7 +65,6 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
-     
     <filter-mapping>
       <filter-name>springSecurityFilterChain</filter-name>
       <url-pattern>/*</url-pattern>

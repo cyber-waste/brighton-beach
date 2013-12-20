@@ -1,6 +1,7 @@
 package cyberwaste.brightonbeach.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -41,6 +42,11 @@ public class File implements Serializable {
     @JoinColumn(name = "card_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Card card;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "content", unique=true)
+    private byte[] content;
 
     public File() {}
 
@@ -59,6 +65,22 @@ public class File implements Serializable {
     
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public Card getCard() {
+        return card;
+    }
+    
+    public void setCard(Card card) {
+        this.card = card;
+    }
+    
+    public byte[] getContent() {
+        return Arrays.copyOf(content, content.length);
+    }
+    
+    public void setContent(byte[] content) {
+        this.content = Arrays.copyOf(content, content.length);
     }
 
     @Override

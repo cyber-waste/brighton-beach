@@ -46,8 +46,7 @@
     
     <view-state id="cardEditor">
         <on-entry>
-            <set name="flowScope.selectedChild" value="null" />
-            <evaluate expression="fileService.findForCard(flowScope.selectedObject)" result="viewScope.children"/>
+            <evaluate expression="fileService.findForCard(flowScope.selectedObject)" result="viewScope.files"/>
         </on-entry>
         
         <transition on="objectsList" to="cards" />
