@@ -1,8 +1,11 @@
 package cyberwaste.brightonbeach.web.service.impl;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +39,14 @@ public class FileServiceImpl implements FileService {
         file.setContent(uploadedFile.getContents());
         
         fileRepository.save(file);
+    }
+    
+    @Override
+    public StreamedContent downloadFile(File file) {
+        DefaultStreamedContent defaultStreamedContent = new DefaultStreamedContent();
+        defaultStreamedContent.setName(file.getName());
+        defaultStreamedContent.setStream(new ByteArrayInputStream(file.getContent()));
+        
+        return defaultStreamedContent;
     }
 }

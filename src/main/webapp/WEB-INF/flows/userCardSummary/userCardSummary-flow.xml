@@ -29,11 +29,18 @@
             <evaluate expression="applyService.makeApplyForCard(currentUser.name, flowScope.selectedObject, messageContext)" />
         </transition>
         
+        <transition on="getApply" to="getApply" />
+        
         <transition on="exitSummary" to="flowExit" />
         <transition on="childrenSummary" to="applySummary" />
     </view-state>
      
     <subflow-state id="applySummary" subflow="applySummary">
+        <input name="apply" value="flowScope.selectedChild" />
+        <transition to="cardSummary" />
+    </subflow-state>
+     
+    <subflow-state id="getApply" subflow="userApplySummary">
         <input name="apply" value="flowScope.selectedChild" />
         <transition to="cardSummary" />
     </subflow-state>

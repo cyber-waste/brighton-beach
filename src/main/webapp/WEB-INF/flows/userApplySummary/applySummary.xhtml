@@ -10,16 +10,16 @@
                 
                 template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="title" value="Card &quot;#{flowScope.selectedObject.name}&quot;" />
-    <ui:param name="panelTitle" value="Card" />
+    <ui:param name="title" value="Apply &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="panelTitle" value="Card &quot;#{flowScope.selectedObject.card.name}&quot; :: Apply &quot;#{flowScope.selectedObject.name}&quot;" />
     
     <ui:define name="leftToolbar">
         <p:commandButton value="Back" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
         <p:separator />
-        <p:commandButton value="Make Apply" icon="ui-icon-cart" action="makeApply" ajax="false" />
-        <p:separator />
-        <p:commandButton value="Get Apply" icon="ui-icon-zoomin" action="getApply" ajax="false" 
-            disabled="#{empty flowScope.selectedChild || flowScope.selectedChild.state != 'ACCEPTED'}"/>
+        <p:commandButton 
+                value="Download" icon="ui-icon-arrowthickstop-1-s" ajax="false" disabled="#{empty flowScope.selectedChild}">
+            <p:fileDownload value="#{fileService.downloadFile(flowScope.selectedChild)}" />
+        </p:commandButton>
     </ui:define>
     
     <ui:define name="center">
@@ -33,20 +33,30 @@
                         <h:panelGrid id="editPanel" columns="2">
                             <p:outputLabel for="id" value="Id" />
                             <p:inputText id="id" readonly="true" value="#{flowScope.selectedObject.id}" size="80" />
-                            
+        
+                            <p:outputLabel for="card" value="Card" />
+                            <p:inputText id="card" readonly="true" value="#{flowScope.selectedObject.card.name}" size="80" />
+        
                             <p:outputLabel for="name" value="Name" />
-                            <p:inputText id="name" readonly="true" value="#{flowScope.selectedObject.name}" size="80" />
+                            <p:inputTextarea id="name" readonly="true" value="#{flowScope.selectedObject.name}" style="width:98%" />
+        
+                            <p:outputLabel for="username" value="User" />
+                            <p:inputTextarea id="username" readonly="true" value="#{flowScope.selectedObject.user.name}" style="width:98%" />
+        
+                            <p:outputLabel for="state" value="State" />
+                            <p:inputTextarea id="state" readonly="true" value="#{flowScope.selectedObject.state}" style="width:98%" />
+        
                         </h:panelGrid>
                     </p:panel>
                     
                 </p:column>
                 
-                <p:column colspan="2" styleClass="bb-top-aligment">
+                <p:column styleClass="bb-top-aligment">
                 
-                    <p:panel header="Applies">
+                    <p:panel id="filesPanel" header="Attached files" styleClass="bb-noborder">
                         <p:dataTable 
-                                id="childrenTable" widgetVar="childrenTable" value="#{childrenLazyModel}" var="child" 
-                                lazy="true" selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" 
+                                id="childrenTable" widgetVar="childrenTable" value="#{files}" var="child" 
+                                selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" 
                                 paginator="true" rows="10" rowsPerPageTemplate="5,10,15"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
                             
@@ -54,9 +64,8 @@
                             <p:ajax event="rowSelect" update=":centerForm:toolBar" />
                             <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
                             <p:ajax event="page"
-                                onstart="childrenTableBlocker.show(); childrenTable.unselectAllRows()"
-                                oncomplete="childrenTableBlocker.hide()" 
-                                update=":centerForm:toolBar" />
+                                onstart="childrenTableBlocker.show(); childrenTable.unselectAllRows()" 
+                                oncomplete="childrenTableBlocker.hide()" update=":centerForm:toolBar" />
                             
                             <p:column headerText="Id">
                                 <h:outputText value="#{child.id}" />
@@ -66,16 +75,8 @@
                                 <h:outputText value="#{child.name}" />
                             </p:column>
                             
-                            <p:column headerText="User">
-                                <h:outputText value="#{child.user.name}" />
-                            </p:column>
-                            
-                            <p:column headerText="State">
-                                <h:outputText value="#{child.state}" />
-                            </p:column>
-                            
                         </p:dataTable>
-        
+                        
                         <p:blockUI block="childrenTable" widgetVar="childrenTableBlocker">
                             <p:graphicImage value="/images/ajax-loader.gif" />
                         </p:blockUI>

@@ -26,3 +26,5 @@ src/main/resources/env-datasource.properties
 
 # Runtime #
 data/*
+/build
+/bin
