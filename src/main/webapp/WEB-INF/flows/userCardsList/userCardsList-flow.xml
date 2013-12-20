@@ -31,7 +31,7 @@
         <transition on="objectSummary" to="cardSummary" />
     </view-state>
     
-    <subflow-state id="cardSummary" subflow="cardSummary">
+    <subflow-state id="cardSummary" subflow="userCardSummary">
         <input name="card" value="flowScope.selectedObject" />
         <transition to="cards" />
     </subflow-state>

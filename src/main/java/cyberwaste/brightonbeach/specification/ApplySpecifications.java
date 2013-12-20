@@ -11,6 +11,7 @@ import cyberwaste.brightonbeach.domain.Apply;
 import cyberwaste.brightonbeach.domain.Apply_;
 import cyberwaste.brightonbeach.domain.Card;
 import cyberwaste.brightonbeach.domain.Card_;
+import cyberwaste.brightonbeach.domain.User_;
 
 public final class ApplySpecifications {
     
@@ -20,13 +21,16 @@ public final class ApplySpecifications {
         return SpecificationUtils.any();
     }
     
-    public static SerializableSpecification<Apply> ofCard(final Card card) {
+    public static SerializableSpecification<Apply> ofCardAndUser(final Card card, final String username) {
         return new SerializableSpecification<Apply>() {
             private static final long serialVersionUID = 1L;
 
             @Override
             public Predicate toPredicate(Root<Apply> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                return criteriaBuilder.equal(root.get(Apply_.card), card);
+                return criteriaBuilder.and(
+                    criteriaBuilder.equal(root.get(Apply_.card), card),
+                    criteriaBuilder.equal(root.get(Apply_.user).get(User_.name), username)
+                );
             }
         };
     }

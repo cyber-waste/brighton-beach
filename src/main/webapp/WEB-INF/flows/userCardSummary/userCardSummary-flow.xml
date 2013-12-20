@@ -6,7 +6,7 @@
       
       start-state="cardSummary">
       
-    <secured match="any" attributes="ROLE_USER,ROLE_ADMIN"/>
+    <secured match="any" attributes="ROLE_USER"/>
     
     <var name="flowScope.selectedObject" class="cyberwaste.brightonbeach.domain.Card" />
     
@@ -21,7 +21,7 @@
             <set name="flowScope.selectedChild" value="null" />
             
             <evaluate 
-                expression="applyService.lazyModel(T(cyberwaste.brightonbeach.specification.ApplySpecifications).ofCard(flowScope.selectedObject))" 
+                expression="applyService.lazyModel(T(cyberwaste.brightonbeach.specification.ApplySpecifications).ofCardAndUser(flowScope.selectedObject, currentUser.name))" 
                 result="viewScope.childrenLazyModel"/>
         </on-entry>
         
