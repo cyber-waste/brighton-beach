@@ -1,6 +1,7 @@
 package cyberwaste.brightonbeach.web.service.impl;
 
 import java.io.ByteArrayInputStream;
+import java.util.Collections;
 import java.util.List;
 
 import org.primefaces.event.FileUploadEvent;
@@ -24,7 +25,11 @@ public class FileServiceImpl implements FileService {
     
     @Override
     public List<File> findForCard(Card card) {
-        return fileRepository.findByCard(card);
+        try {
+            return fileRepository.findByCard(card);
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
     
     @Override
