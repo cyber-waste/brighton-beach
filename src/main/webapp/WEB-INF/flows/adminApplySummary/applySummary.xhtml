@@ -10,17 +10,20 @@
                 
                 template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="title" value="Apply &quot;#{flowScope.selectedObject.name}&quot;" />
-    <ui:param name="panelTitle" value="Card &quot;#{flowScope.selectedObject.card.name}&quot; :: Apply &quot;#{flowScope.selectedObject.name}&quot;" />
+    <ui:param name="title" value="#{i18nService.apply(flowScope.selectedObject)}" />
+    <ui:param name="panelTitle" value="#{i18nService.applyForCard(flowScope.selectedObject)}" />
     
     <ui:define name="leftToolbar">
-        <p:commandButton value="Back" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
+        <p:commandButton value="#{i18nService.back()}" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
+        
         <p:separator />
+        
         <p:commandButton 
-            value="Accept" icon="ui-icon-check" action="acceptApply" ajax="false" 
+            value="#{i18nService.accept()}" icon="ui-icon-check" action="acceptApply" ajax="false" 
             rendered="#{flowScope.selectedObject.state eq 'OPEN'}" />
         <p:commandButton 
-            value="Reject" icon="ui-icon-close" action="rejectApply" ajax="false" 
+        
+            value="#{i18nService.reject()}" icon="ui-icon-close" action="rejectApply" ajax="false" 
             rendered="#{flowScope.selectedObject.state eq 'OPEN'}" />
     </ui:define>
     
@@ -31,23 +34,20 @@
             <p:row>
                 <p:column styleClass="bb-top-aligment">
                 
-                    <p:panel header="Summary" styleClass="bb-noborder">
+                    <p:panel header="#{i18nService.information()}" styleClass="bb-noborder">
                         <h:panelGrid id="editPanel" columns="2">
-                            <p:outputLabel for="id" value="Id" />
-                            <p:inputText id="id" readonly="true" value="#{flowScope.selectedObject.id}" size="80" />
-        
-                            <p:outputLabel for="card" value="Card" />
+                            <p:outputLabel for="card" value="#{i18nService.cardName()}" />
                             <p:inputText id="card" readonly="true" value="#{flowScope.selectedObject.card.name}" size="80" />
-        
-                            <p:outputLabel for="name" value="Name" />
-                            <p:inputTextarea id="name" readonly="true" value="#{flowScope.selectedObject.name}" style="width:98%" />
-        
-                            <p:outputLabel for="username" value="User" />
-                            <p:inputTextarea id="username" readonly="true" value="#{flowScope.selectedObject.user.name}" style="width:98%" />
-        
-                            <p:outputLabel for="state" value="State" />
-                            <p:inputTextarea id="state" readonly="true" value="#{flowScope.selectedObject.state}" style="width:98%" />
-        
+                            
+                            <p:outputLabel for="name" value="#{i18nService.applyName()}" />
+                            <p:inputText id="name" readonly="true" value="#{flowScope.selectedObject.name}" />
+                            
+                            <p:outputLabel for="username" value="#{i18nService.applyBy()}" />
+                            <p:inputText id="username" readonly="true" value="#{flowScope.selectedObject.user.fullname}" />
+                            
+                            <p:outputLabel for="state" value="#{i18nService.status()}" />
+                            <p:inputText id="state" readonly="true" value="#{i18nService.status(flowScope.selectedObject.state)}" />
+                            
                         </h:panelGrid>
                     </p:panel>
                     

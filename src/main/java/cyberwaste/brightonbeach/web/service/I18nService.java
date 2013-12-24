@@ -1,5 +1,6 @@
 package cyberwaste.brightonbeach.web.service;
 
+import cyberwaste.brightonbeach.domain.Apply;
 import cyberwaste.brightonbeach.domain.Card;
 
 public interface I18nService {
@@ -28,4 +29,11 @@ public interface I18nService {
     String applyBy();
     String status();
     String status(String status);
+    String apply(Apply apply);
+    String applyForCard(Apply apply);
+    String back();
+    String accept();
+    String reject();
+    String information();
+    String applyName();
 }

@@ -3,6 +3,7 @@ package cyberwaste.brightonbeach.web.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cyberwaste.brightonbeach.domain.Apply;
 import cyberwaste.brightonbeach.domain.ApplyState;
 import cyberwaste.brightonbeach.domain.Card;
 import cyberwaste.brightonbeach.domain.User;
@@ -159,5 +160,40 @@ public class I18nServiceImpl implements I18nService {
             
             default: return "Невідомо";
         }
+    }
+    
+    @Override
+    public String apply(Apply apply) {
+        return "Заявка '" + apply.getName() + "'";
+    }
+    
+    @Override
+    public String applyForCard(Apply apply) {
+        return "Заявка '" + apply.getName() + "' на картку '" + apply.getCard().getName() + "'";
+    }
+    
+    @Override
+    public String back() {
+        return "Назад";
+    }
+    
+    @Override
+    public String accept() {
+        return "Прийняти";
+    }
+    
+    @Override
+    public String reject() {
+        return "Відхилити";
+    }
+    
+    @Override
+    public String information() {
+        return "Інформація";
+    }
+    
+    @Override
+    public String applyName() {
+        return "Назва заявки";
     }
 }
