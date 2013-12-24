@@ -13,9 +13,9 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             
             <title>brighton-beach :: #{title}</title>
-            
+            <!-- 
             <link rel="stylesheet" href="${request.contextPath}/styles/custom.css" type="text/css" media="screen" />
-            
+             -->
             <ui:insert name="headIncludes"/>
             <ui:insert name="scripts"/>
         </h:head>
@@ -24,10 +24,7 @@
             <h:form>
                 <h:panelGrid columns="3" border="0" width="100%" columnClasses="headerLogo,headerMenu" class="bb-title">
                     
-                    <h:panelGroup>
-                        <p:spacer width="10"/>
-                        <h:graphicImage url="/images/logo.gif" width="60" height="30" />
-                    </h:panelGroup>
+                    <h:graphicImage url="/images/header.png" height="80%" />
                     
                     <p:menubar autoDisplay="false" styleClass="bb-title-menu" >
                         <p:menuitem 

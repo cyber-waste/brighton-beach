@@ -45,7 +45,7 @@
     color: blue;
 }
 
-body {background: rgb(120,120,120);}
+body {background: #ff4040;}
 
 html, body {
     height: 98%;
@@ -54,21 +54,21 @@ html, body {
 /* custom classes */
 
 .bb-title {
-    background: rgb(50,50,50);
+    background: #cc0000;
 }
 
 .bb-title-menu {
-   background: rgb(50,50,50);
+   background: #cc0000;
    border: none;
 }
 
 .bb-action-panel {
-   background: #145080;
+   background: #a60000;
    margin-bottom: 1em;
 }
 
 .bb-breadcrumb-panel {
-   background: #145080;
+   background: #a60000;
    margin-bottom: 1em;
 }
 .bb-top-aligment {
