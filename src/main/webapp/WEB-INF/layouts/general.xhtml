@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -8,16 +8,17 @@
       xmlns:s="http://www.springframework.org/security/tags">
     
     <f:view contentType="text/html">
-    
+        
         <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             
-            <title>brighton-beach :: #{title}</title>
+            <title>#{i18nService.title(title)}</title>
              
             <link rel="stylesheet" href="${request.contextPath}/styles/custom.css" type="text/css" media="screen" />
             
-            <ui:insert name="headIncludes"/>
-            <ui:insert name="scripts"/>
+            <ui:insert name="headIncludes" />
+            
+            <ui:insert name="scripts" />
         </h:head>
         
         <h:body>
@@ -28,34 +29,17 @@
                     
                     <p:menubar autoDisplay="false" styleClass="bb-title-menu" >
                         <p:menuitem 
-                            value="Home" icon="ui-icon-home" 
+                            value="#{i18nService.cards()}" icon="ui-icon-bookmark" 
                             disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}"
                             url="#{s:areAnyGranted('ROLE_ADMIN') ? 'adminCardsList' : 'userCardsList'}" />
-                        
-                        <p:submenu label="Cards" icon="ui-icon-bookmark">
-                            <p:menuitem 
-                                value="View" disabled="#{s:areNotGranted('ROLE_USER')}" 
-                                url="userCardsList" />
-                            
-                            <p:separator />
-                            
-                            <p:menuitem 
-                                value="Manage" disabled="#{s:areNotGranted('ROLE_ADMIN')}" 
-                                url="adminCardsList" />
-                        </p:submenu>
                             
                         <p:menuitem 
-                            value="Logout" icon="ui-icon-close" rendered="#{not empty currentUser.name}" url="logout"/>
+                            value="#{i18nService.loggedOut()}" icon="ui-icon-close" rendered="#{not empty currentUser.name}" 
+                            url="logout" />
                     </p:menubar>
                     
                     <h:panelGroup style="font-size: 80%;">
-                        <h:outputText value="User: "/>
-                        <b>
-                            <c:choose>
-                                <c:when test="${not empty currentUser.name}">${currentUser.name}</c:when>
-                                <c:otherwise>Anonymous</c:otherwise>
-                            </c:choose>
-                        </b>
+                        <h:outputText value="#{i18nService.userFullname(currentUser.name)}"/>
                     </h:panelGroup>
                     
                 </h:panelGrid>
@@ -78,7 +62,9 @@
                     </p:toolbar>
                     
                     <p:messages id="messages" globalOnly="true" autoUpdate="true"/>
+                    
                     <ui:insert name="center"/>
+                    
                 </h:form>
                 
                 <ui:insert name="afterForm"/>
@@ -86,6 +72,7 @@
             </p:panel>
             
             <ui:insert name="dialogs"/>
+            
         </h:body>
         
     </f:view>

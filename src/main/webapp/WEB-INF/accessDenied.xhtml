@@ -1,4 +1,4 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
@@ -7,12 +7,12 @@
                 
                 template="layouts/general.xhtml">
     
-    <ui:param name="title" value="Access Denied!" />
-    <ui:param name="panelTitle" value="Access Denied!" />
+    <ui:param name="title" value="#{i18nService.accessDenied()}" />
+    <ui:param name="panelTitle" value="#{i18nService.accessDenied()}" />
     <ui:param name="showToolBar" value="false" />
     
     <ui:define name="afterForm">
-        <h:outputText value="Access Denied!" style="color: red; font-size: 150%; font-weight: bold;"/>
+        <h:outputText value="#{i18nService.accessDenied()}" style="font-size: 150%; font-weight: bold;"/>
     </ui:define>
 
 </ui:composition>

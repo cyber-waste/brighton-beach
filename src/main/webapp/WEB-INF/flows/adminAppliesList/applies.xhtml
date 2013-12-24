@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -9,28 +8,29 @@
                 
                 template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="title" value="#{flowScope.exactCard != null ? 'Applies for '.concat(flowScope.exactCard.name) : 'Applies'}" />
-    <ui:param name="panelTitle" value="#{flowScope.exactCard != null ? 'Applies for '.concat(flowScope.exactCard.name) : 'Applies'}" />
+    <ui:param name="title" value="#{i18nService.appliesFor(flowScope.exactCard)}" />
+    <ui:param name="panelTitle" value="#{i18nService.appliesFor(flowScope.exactCard)}" />
     
     <ui:define name="leftToolbar">
         <p:commandButton 
-            value="View" icon="ui-icon-search" action="objectSummary" disabled="#{empty flowScope.selectedObject}" ajax="false" />
+            value="#{i18nService.view()}" icon="ui-icon-search" action="objectSummary" 
+            disabled="#{empty flowScope.selectedObject}" ajax="false" />
         
         <p:separator />
         
         <p:commandButton 
-            value="Card" icon="ui-icon-arrowreturnthick-1-n" action="parentSummary" 
+            value="#{i18nService.card()}" icon="ui-icon-arrowreturnthick-1-n" action="parentSummary" 
             disabled="#{empty flowScope.selectedObject}" ajax="false" />
     </ui:define>
     
     <ui:define name="rightToolbar">
-        <p:outputLabel value="Filtering:"/>
+        <p:outputLabel value="#{i18nService.search()}:"/>
         
-        <p:outputLabel for="cardName" value="Card name" />
+        <p:outputLabel for="cardName" value="#{i18nService.cardName()}" />
         <p:inputText id="cardName" value="#{flowScope.filteringCardName}" disabled="#{flowScope.exactCard != null}"/>
         
-        <p:commandButton value="Apply Filter" action="applyFilter" icon="ui-icon-search" ajax="false" />
-        <p:commandButton value="Reset Filter" action="cancelFiltering" icon="ui-icon-close" process="@this" />
+        <p:commandButton value="#{i18nService.search()}" action="applyFilter" icon="ui-icon-search" ajax="false" />
+        <p:commandButton value="#{i18nService.showAll()}" action="cancelFiltering" icon="ui-icon-close" process="@this" />
     </ui:define>
     
     <ui:define name="center">
@@ -46,23 +46,18 @@
             <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
             <p:ajax event="page"
                 onstart="objectsTableBlocker.show(); objectsTable.unselectAllRows()"
-                oncomplete="objectsTableBlocker.hide()" 
-                update=":centerForm:toolBar" />
+                oncomplete="objectsTableBlocker.hide()" update=":centerForm:toolBar" />
             
-            <p:column headerText="Id">
-                <h:outputText value="#{object.id}" />
-            </p:column>
-            
-            <p:column headerText="Card Name">
+            <p:column headerText="#{i18nService.cardName()}">
                 <h:outputText value="#{object.card.name}" />
             </p:column>
             
-            <p:column headerText="User Name">
-                <h:outputText value="#{object.user.name}" />
+            <p:column headerText="#{i18nService.applyBy()}">
+                <h:outputText value="#{object.user.fullname}" />
             </p:column>
             
-            <p:column headerText="State">
-                <h:outputText value="#{object.state}" />
+            <p:column headerText="#{i18nService.status()}">
+                <h:outputText value="#{i18nService.status(object.state)}" />
             </p:column>
             
         </p:dataTable>

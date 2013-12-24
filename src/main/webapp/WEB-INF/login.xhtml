@@ -1,4 +1,4 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
@@ -7,59 +7,92 @@
                 
                 template="layouts/general.xhtml">
 
-    <ui:param name="title" value="Login" />
-    <ui:param name="panelTitle" value="Login Information" />
+    <ui:param name="title" value="#{i18nService.login()}" />
+    <ui:param name="panelTitle" value="#{i18nService.loginInformation()}" />
     <ui:param name="showToolBar" value="false" />
     
     <ui:define name="afterForm">
         <div class="span-10 append-2 last">
+            
             <c:if test="${not empty param.login_error}">
                 <div class="error">
-                    Your login attempt was not successful, try again.<br />
-                    Reason: #{sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
+                    #{i18nService.loginFailed()}
+                    <br/>
+                    #{i18nService.loginFailedReason(sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message)}
                 </div>
             </c:if>
+            
             <form name="f" action="${request.contextPath}/spring/loginProcess" method="post">
                 <table>
                     <tbody>
                         <tr>
-                            <td><label id="j_idt62" class="ui-outputlabel" for="j_username">User:</label></td>
                             <td>
-                                <input id="j_username" name="j_username" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all" />
-                                <script id="j_username_s" type="text/javascript">PrimeFaces.cw('InputText','widget_j_username',{id:'j_username'});</script>
+                                <label id="j_idt62" class="ui-outputlabel" for="j_username">
+                                    #{i18nService.user()}:
+                                </label>
+                            </td>
+                            <td>
+                                <input 
+                                    id="j_username" name="j_username" type="text" 
+                                    class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all" />
+                                
+                                <script id="j_username_s" type="text/javascript">
+                                    PrimeFaces.cw('InputText','widget_j_username',{id:'j_username'});
+                                </script>
                             </td>
                         </tr>
+                        
                         <tr>
-                            <td><label id="j_idt63" class="ui-outputlabel" for="j_password">Password:</label></td>
                             <td>
-                                <input id="j_password" name="j_password" type="password" class="ui-inputfield ui-password ui-widget ui-state-default ui-corner-all" />
-                                <script id="j_password_s" type="text/javascript">$(function(){PrimeFaces.cw('Password','widget_j_password',{id:'j_password'});});</script>
+                                <label id="j_idt63" class="ui-outputlabel" for="j_password">
+                                    #{i18nService.password()}:
+                                </label>
+                            </td>
+                            <td>
+                                <input 
+                                    id="j_password" name="j_password" type="password" 
+                                    class="ui-inputfield ui-password ui-widget ui-state-default ui-corner-all" />
+                                
+                                <script id="j_password_s" type="text/javascript">
+                                    $(function(){PrimeFaces.cw('Password','widget_j_password',{id:'j_password'});});
+                                </script>
                             </td>
                         </tr>
+                        
                         <tr>
-                            <td><label id="j_idt64" class="ui-outputlabel" for="_spring_security_remember_me">Remember Me:</label></td>
+                            <td>
+                                <label id="j_idt64" class="ui-outputlabel" for="_spring_security_remember_me">
+                                    #{i18nService.rememberMe()}:
+                                </label>
+                            </td>
                             <td>
                                 <div id="_spring_security_remember_me" class="ui-chkbox ui-widget">
                                     <div class="ui-helper-hidden-accessible">
-                                        <input id="_spring_security_remember_me_input" name="_spring_security_remember_me_input" type="checkbox" />
+                                        <input 
+                                            id="_spring_security_remember_me_input" name="_spring_security_remember_me_input" 
+                                            type="checkbox" />
                                     </div>
                                     <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
                                         <span class="ui-chkbox-icon"></span>
                                     </div>
                                 </div>
-                                <script id="_spring_security_remember_me_s" type="text/javascript">PrimeFaces.cw('SelectBooleanCheckbox','widget__spring_security_remember_me',{id:'_spring_security_remember_me'});</script>
+                                <script id="_spring_security_remember_me_s" type="text/javascript">
+                                    PrimeFaces.cw('SelectBooleanCheckbox','widget__spring_security_remember_me',{id:'_spring_security_remember_me'});
+                                </script>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- simple HTML submit button with Primefaces blows and whistles -->
-                <button id="submit" 
+                <button 
+                        id="submit" 
                         name="submit" 
                         type="submit" 
                         class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-                    <span class="ui-button-text">Login</span>
+                    
+                    <span class="ui-button-text">#{i18nService.login()}</span>
                 </button>
+                
                 <script id="submit_s" type="text/javascript">
                     PrimeFaces.cw('Button','widget_submit',{id:'submit'});
                 </script>

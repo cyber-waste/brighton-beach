@@ -38,6 +38,12 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(max = 40)
+    @Column(name = "fullname", unique=true)
+    private String fullname;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(max = 40)
     @Column(name = "role", unique=true)
     private String role;
 
@@ -66,6 +72,14 @@ public class User implements Serializable {
     
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String getFullname() {
+        return fullname;
+    }
+    
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
     
     public String getRole() {
