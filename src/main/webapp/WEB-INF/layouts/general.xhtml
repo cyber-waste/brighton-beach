@@ -13,16 +13,16 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             
             <title>brighton-beach :: #{title}</title>
-            <!-- 
+             
             <link rel="stylesheet" href="${request.contextPath}/styles/custom.css" type="text/css" media="screen" />
-             -->
+            
             <ui:insert name="headIncludes"/>
             <ui:insert name="scripts"/>
         </h:head>
         
         <h:body>
             <h:form>
-                <h:panelGrid columns="3" border="0" width="100%" columnClasses="headerLogo,headerMenu" class="bb-title">
+                <h:panelGrid columns="3" border="0" width="100%">
                     
                     <h:graphicImage url="/images/header.png" height="80%" />
                     
@@ -48,7 +48,7 @@
                             value="Logout" icon="ui-icon-close" rendered="#{not empty currentUser.name}" url="logout"/>
                     </p:menubar>
                     
-                    <h:panelGroup style="color: white;font-size: 80%;">
+                    <h:panelGroup style="font-size: 80%;">
                         <h:outputText value="User: "/>
                         <b>
                             <c:choose>

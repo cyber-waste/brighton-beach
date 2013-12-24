@@ -1,26 +1,27 @@
-/* fix font size */
+/* font size */
 
-.ui-widget { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 1.1em; }
-.ui-widget .ui-widget { font-size: 1em; }
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 1em; }
-.ui-widget {font-size: 12px !important;}
+.ui-widget {
+	font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; 
+	font-size: 1.1em; 
+}
 
+.ui-widget .ui-widget { 
+	font-size: 1em; 
+}
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { 
+	font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; 
+	font-size: 1em; 
+}
+
+.ui-widget {
+	font-size: 12px !important;
+}
 
 /* custom UI styles */
 
-.ui-datatable tr.ui-state-highlight {
-    background: rgb(120,120,120)!important;
-    color: white;    
-}
-
-.ui-datatable th {
-    background: #165788 !important;
-    color: #ffffff;
-}
-
 .ui-datatable-scrollable .ui-datatable-scrollable-header {
     background: none;
-  
 }
 
 .ui-datatable-even {
@@ -41,36 +42,24 @@
     color: blue;
 }
 
-.ui-datatable .ui-datatable-data tr.ui-state-hover {
-    color: blue;
-}
-
-body {background: #ff4040;}
-
 html, body {
     height: 98%;
 }
 
 /* custom classes */
 
-.bb-title {
-    background: #cc0000;
-}
-
 .bb-title-menu {
-   background: #cc0000;
    border: none;
 }
 
 .bb-action-panel {
-   background: #a60000;
    margin-bottom: 1em;
 }
 
 .bb-breadcrumb-panel {
-   background: #a60000;
    margin-bottom: 1em;
 }
+
 .bb-top-aligment {
     vertical-align: top;
 }
