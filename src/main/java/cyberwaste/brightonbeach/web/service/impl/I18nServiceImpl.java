@@ -285,4 +285,9 @@ public class I18nServiceImpl implements I18nService {
     public String download() {
         return "Завантажити файл";
     }
+    
+    @Override
+    public String viewCard() {
+        return "Переглянути картку";
+    }
 }

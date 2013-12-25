@@ -52,4 +52,5 @@ public interface I18nService {
     String chooseFile();
     String underConstruction();
     String download();
+    String viewCard();
 }

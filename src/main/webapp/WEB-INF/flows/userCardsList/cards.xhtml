@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -9,17 +8,23 @@
                 
                 template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="title" value="Cards" />
-    <ui:param name="panelTitle" value="Cards" />
+    <ui:param name="title" value="#{i18nService.cards()}" />
+    <ui:param name="panelTitle" value="#{i18nService.cards()}" />
+    
+    <ui:define name="leftToolbar">
+        <p:commandButton 
+            value="#{i18nService.viewCard()}" icon="ui-icon-search" action="objectSummary" 
+            disabled="#{empty flowScope.selectedObject}" ajax="false" />
+    </ui:define>
     
     <ui:define name="rightToolbar">
-        <p:outputLabel value="Filtering:"/>
+        <p:outputLabel value="#{i18nService.search()}:"/>
         
-        <p:outputLabel for="cardName" value="Name" />
+        <p:outputLabel for="cardName" value="#{i18nService.cardName()}" />
         <p:inputText id="cardName" value="#{flowScope.filteringCardName}" />
         
-        <p:commandButton value="Apply Filter" action="applyFilter" icon="ui-icon-search" ajax="false" />
-        <p:commandButton value="Reset Filter" action="cancelFiltering" icon="ui-icon-close" process="@this" />
+        <p:commandButton value="#{i18nService.search()}" action="applyFilter" icon="ui-icon-search" ajax="false" />
+        <p:commandButton value="#{i18nService.showAll()}" action="cancelFiltering" icon="ui-icon-close" process="@this" />
     </ui:define>
     
     <ui:define name="center">
@@ -31,21 +36,12 @@
             <p:ajax event="rowSelect" update=":centerForm:toolBar" />
             <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
             
-            <p:column headerText="Id" width="50">
-                <h:outputText value="#{object.id}" />
-            </p:column>
-            
-            <p:column headerText="Name" width="300">
+            <p:column headerText="#{i18nService.cardName()}">
                 <h:outputText value="#{object.name}" />
             </p:column>
             
         </p:dataTable>
         
-    </ui:define>
-    
-    <ui:define name="leftToolbar">
-        <p:commandButton 
-            value="View" icon="ui-icon-search" action="objectSummary" disabled="#{empty flowScope.selectedObject}" ajax="false" />
     </ui:define>
     
 </ui:composition>
