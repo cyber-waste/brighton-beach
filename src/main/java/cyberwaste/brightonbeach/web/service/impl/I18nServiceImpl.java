@@ -290,4 +290,14 @@ public class I18nServiceImpl implements I18nService {
     public String viewCard() {
         return "Переглянути картку";
     }
+    
+    @Override
+    public String makeApply() {
+        return "Подати заявку";
+    }
+    
+    @Override
+    public String getApply() {
+        return "Отримати картку";
+    }
 }

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -10,15 +9,19 @@
                 
                 template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="title" value="Card &quot;#{flowScope.selectedObject.name}&quot;" />
-    <ui:param name="panelTitle" value="Card" />
+    <ui:param name="title" value="#{i18nService.card(flowScope.selectedObject)}" />
+    <ui:param name="panelTitle" value="#{i18nService.card(flowScope.selectedObject)}" />
     
     <ui:define name="leftToolbar">
-        <p:commandButton value="Back" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
+        <p:commandButton value="#{i18nService.back()}" action="exitSummary" icon="ui-icon-arrowreturnthick-1-w" />
+        
         <p:separator />
-        <p:commandButton value="Make Apply" icon="ui-icon-cart" action="makeApply" ajax="false" />
+        
+        <p:commandButton value="#{i18nService.makeApply()}" icon="ui-icon-cart" action="makeApply" ajax="false" />
+        
         <p:separator />
-        <p:commandButton value="Get Apply" icon="ui-icon-zoomin" action="getApply" ajax="false" 
+        
+        <p:commandButton value="#{i18nService.getApply()}" icon="ui-icon-zoomin" action="getApply" ajax="false" 
             disabled="#{empty flowScope.selectedChild || flowScope.selectedChild.state != 'ACCEPTED'}"/>
     </ui:define>
     
@@ -29,12 +32,9 @@
             <p:row>
                 <p:column styleClass="bb-top-aligment">
                 
-                    <p:panel header="Summary" styleClass="bb-noborder">
+                    <p:panel header="#{i18nService.information()}" styleClass="bb-noborder">
                         <h:panelGrid id="editPanel" columns="2">
-                            <p:outputLabel for="id" value="Id" />
-                            <p:inputText id="id" readonly="true" value="#{flowScope.selectedObject.id}" size="80" />
-                            
-                            <p:outputLabel for="name" value="Name" />
+                            <p:outputLabel for="name" value="#{i18nService.cardName()}" />
                             <p:inputText id="name" readonly="true" value="#{flowScope.selectedObject.name}" size="80" />
                         </h:panelGrid>
                     </p:panel>
@@ -43,7 +43,7 @@
                 
                 <p:column colspan="2" styleClass="bb-top-aligment">
                 
-                    <p:panel header="Applies">
+                    <p:panel header="#{i18nService.applies()}">
                         <p:dataTable 
                                 id="childrenTable" widgetVar="childrenTable" value="#{childrenLazyModel}" var="child" 
                                 lazy="true" selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" 
@@ -58,20 +58,12 @@
                                 oncomplete="childrenTableBlocker.hide()" 
                                 update=":centerForm:toolBar" />
                             
-                            <p:column headerText="Id">
-                                <h:outputText value="#{child.id}" />
-                            </p:column>
-                            
-                            <p:column headerText="Name">
+                            <p:column headerText="#{i18nService.applyName()}">
                                 <h:outputText value="#{child.name}" />
                             </p:column>
                             
-                            <p:column headerText="User">
-                                <h:outputText value="#{child.user.name}" />
-                            </p:column>
-                            
-                            <p:column headerText="State">
-                                <h:outputText value="#{child.state}" />
+                            <p:column headerText="#{i18nService.status()}">
+                                <h:outputText value="#{i18nService.status(child.state)}" />
                             </p:column>
                             
                         </p:dataTable>

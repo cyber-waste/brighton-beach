@@ -53,4 +53,6 @@ public interface I18nService {
     String underConstruction();
     String download();
     String viewCard();
+    String makeApply();
+    String getApply();
 }
