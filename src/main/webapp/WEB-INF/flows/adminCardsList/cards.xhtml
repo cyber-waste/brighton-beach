@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -9,17 +8,37 @@
                 
                 template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="title" value="Cards" />
-    <ui:param name="panelTitle" value="Cards" />
+    <ui:param name="title" value="#{i18nService.cards()}" />
+    <ui:param name="panelTitle" value="#{i18nService.cards()}" />
+    
+    <ui:define name="leftToolbar">
+        <p:commandButton value="#{i18nService.newCard()}" action="newObject" icon="ui-icon-plus" ajax="false"/>
+        
+        <p:separator />
+        
+        <p:commandButton 
+            value="#{i18nService.deleteCard()}" oncomplete="deleteDialog.show()" update=":deleteContainer" icon="ui-icon-trash" 
+            disabled="#{empty flowScope.selectedObject}" />
+            
+        <p:commandButton 
+            value="#{i18nService.editCard()}" action="editObject" icon="ui-icon-pencil" 
+            disabled="#{empty flowScope.selectedObject}" ajax="false"/>
+        
+        <p:separator />
+            
+        <p:commandButton 
+            value="#{i18nService.appliesForCard()}" icon="ui-icon-arrowreturnthick-1-e" action="appliesForCard"
+            disabled="#{empty flowScope.selectedObject}" ajax="false" />
+    </ui:define>
     
     <ui:define name="rightToolbar">
-        <p:outputLabel value="Filtering:"/>
+        <p:outputLabel value="#{i18nService.search()}:"/>
         
-        <p:outputLabel for="cardName" value="Name" />
+        <p:outputLabel for="cardName" value="#{i18nService.cardName()}" />
         <p:inputText id="cardName" value="#{flowScope.filteringCardName}" />
         
-        <p:commandButton value="Apply Filter" action="applyFilter" icon="ui-icon-search" ajax="false" />
-        <p:commandButton value="Reset Filter" action="cancelFiltering" icon="ui-icon-close" process="@this" />
+        <p:commandButton value="#{i18nService.search()}" action="applyFilter" icon="ui-icon-search" ajax="false" />
+        <p:commandButton value="#{i18nService.showAll()}" action="cancelFiltering" icon="ui-icon-close" process="@this" />
     </ui:define>
     
     <ui:define name="center">
@@ -31,11 +50,7 @@
             <p:ajax event="rowSelect" update=":centerForm:toolBar" />
             <p:ajax event="rowUnselect" update=":centerForm:toolBar" />
             
-            <p:column headerText="Id" width="50">
-                <h:outputText value="#{object.id}" />
-            </p:column>
-            
-            <p:column headerText="Name" width="300">
+            <p:column headerText="#{i18nService.cardName()}" width="300">
                 <h:outputText value="#{object.name}" />
             </p:column>
             
@@ -43,29 +58,14 @@
         
     </ui:define>
     
-    <ui:define name="leftToolbar">
-        <p:commandButton value="New Card" action="newObject" icon="ui-icon-plus" ajax="false"/>
-        <p:separator />
-        <p:commandButton 
-            value="Delete" oncomplete="deleteDialog.show()" update=":deleteContainer" icon="ui-icon-trash" 
-            disabled="#{empty flowScope.selectedObject}" />
-        <p:commandButton value="Edit" action="editObject" icon="ui-icon-pencil" disabled="#{empty flowScope.selectedObject}" ajax="false"/>
-        
-        <p:separator />
-            
-        <p:commandButton 
-            value="Applies" icon="ui-icon-arrowreturnthick-1-e" action="appliesForCard"
-            disabled="#{empty flowScope.selectedObject}" ajax="false" />
-    </ui:define>
-    
     <ui:define name="dialogs">
         <h:form id="deleteContainer">
             <p:confirmDialog
                     id="deleteDialog" widgetVar="deleteDialog" severity="alert"
-                    message="Are you sure want to delete Card &quot;#{flowScope.selectedObject.name}&quot;?"
-                    header="Confirm deletion Card &quot;#{flowScope.selectedObject.name}&quot;">
-                <p:commandButton action="deleteObject" process="@form" value="Yes" />
-                <p:commandButton onclick="deleteDialog.hide()" value="No" />
+                    message="#{i18nService.areYouSureToDelete(flowScope.selectedObject)}"
+                    header="#{i18nService.confirmDeletion(flowScope.selectedObject)}">
+                <p:commandButton action="deleteObject" process="@form" value="#{i18nService.yes()}" />
+                <p:commandButton onclick="deleteDialog.hide()" value="#{i18nService.no()}" />
             </p:confirmDialog>
         </h:form>
     </ui:define>

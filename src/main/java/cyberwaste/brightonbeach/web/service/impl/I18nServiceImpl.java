@@ -196,4 +196,50 @@ public class I18nServiceImpl implements I18nService {
     public String applyName() {
         return "Назва заявки";
     }
+    
+    @Override
+    public String newCard() {
+        return "Створити нову картку";
+    }
+    
+    @Override
+    public String deleteCard() {
+        return "Видалити картку";
+    }
+    
+    @Override
+    public String editCard() {
+        return "Редагувати картку";
+    }
+    
+    @Override
+    public String appliesForCard() {
+        return "Переглянути заявки на картку";
+    }
+    
+    @Override
+    public String areYouSureToDelete(Card card) {
+        if (card == null) {
+            return "Ви дійсно бажаєте видалити картку?";
+        }
+        return "Ви дійсно бажаєте видалити картку '" + card.getName() + "'?";
+    }
+    
+    @Override
+    public String confirmDeletion(Card card) {
+        if (card == null) {
+            return "Підтвердіть видалення картки";
+        }
+        return "Підтвердіть видалення картки '" + card.getName() + "'";
+    }
+    
+    @Override
+    public String no() {
+        return "Ні";
+    }
+    
+    @Override
+    public String yes() {
+        return "Так";
+    }
 }

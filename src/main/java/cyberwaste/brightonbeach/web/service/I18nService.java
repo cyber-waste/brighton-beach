@@ -36,4 +36,12 @@ public interface I18nService {
     String reject();
     String information();
     String applyName();
+    String newCard();
+    String deleteCard();
+    String editCard();
+    String appliesForCard();
+    String areYouSureToDelete(Card card);
+    String confirmDeletion(Card card);
+    String yes();
+    String no();
 }
