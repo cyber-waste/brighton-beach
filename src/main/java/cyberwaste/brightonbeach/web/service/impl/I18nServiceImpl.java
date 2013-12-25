@@ -300,4 +300,34 @@ public class I18nServiceImpl implements I18nService {
     public String getApply() {
         return "Отримати картку";
     }
+
+    @Override
+    public String applyWasMadeFor(Apply apply) {
+        return "Заявка на картку '" + apply.getCard().getName() + "' подана";
+    }
+
+    @Override
+    public String applyWasAccepted(Apply apply) {
+        return "Заявка користувача " + apply.getUser().getFullname() + " на картку '" + apply.getCard().getName() + "' прийнята";
+    }
+
+    @Override
+    public String applyWasAlreadyResolved(Apply apply) {
+        return "Заявка користувача " + apply.getUser().getFullname() + " на картку '" + apply.getCard().getName() + "' уже вирішена";
+    }
+
+    @Override
+    public String applyWasRejected(Apply apply) {
+        return "Заявка користувача " + apply.getUser().getFullname() + " на картку '" + apply.getCard().getName() + "' відхилена";
+    }
+
+    @Override
+    public String cardWasSaved(Card card) {
+        return "Картка '" + card.getName() + "' збережена";
+    }
+
+    @Override
+    public String cardWasDeleted(Card card) {
+        return "Картка '" + card.getName() + "' видалена";
+    }
 }

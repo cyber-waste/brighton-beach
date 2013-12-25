@@ -17,6 +17,7 @@ import cyberwaste.brightonbeach.repository.UserRepository;
 import cyberwaste.brightonbeach.specification.SerializableSpecification;
 import cyberwaste.brightonbeach.web.model.AppliesLazyModel;
 import cyberwaste.brightonbeach.web.service.ApplyService;
+import cyberwaste.brightonbeach.web.service.I18nService;
 
 @Service("applyService")
 public class ApplyServiceImpl implements ApplyService {
@@ -26,6 +27,9 @@ public class ApplyServiceImpl implements ApplyService {
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private I18nService i18nService;
 
     @Override
     public AppliesLazyModel lazyModel(SerializableSpecification<Apply> specification) {
@@ -45,7 +49,7 @@ public class ApplyServiceImpl implements ApplyService {
         applyRepository.save(apply);
         
         messageContext.addMessage(
-            new MessageBuilder().info().defaultText("Apply for card \"" + card.getName() + "\" was made").build()
+            new MessageBuilder().info().defaultText(i18nService.applyWasMadeFor(apply)).build()
         );
     }
     
@@ -57,19 +61,11 @@ public class ApplyServiceImpl implements ApplyService {
             applyRepository.save(apply);
             
             messageContext.addMessage(
-                new MessageBuilder()
-                    .info()
-                    .defaultText("Apply for card \"" + apply.getCard().getName() + "\" for user " 
-                            + apply.getUser().getName() + " was accepted")
-                    .build()
+                new MessageBuilder().info().defaultText(i18nService.applyWasAccepted(apply)).build()
             );
         } else {
             messageContext.addMessage(
-                new MessageBuilder()
-                    .error()
-                    .defaultText("Apply for card \"" + apply.getCard().getName() + "\" for user " 
-                            + apply.getUser().getName() + " was already closed")
-                    .build()
+                new MessageBuilder().error().defaultText(i18nService.applyWasAlreadyResolved(apply)).build()
             );
         }
     }
@@ -82,19 +78,11 @@ public class ApplyServiceImpl implements ApplyService {
             applyRepository.save(apply);
             
             messageContext.addMessage(
-                new MessageBuilder()
-                    .info()
-                    .defaultText("Apply for card \"" + apply.getCard().getName() + "\" for user " 
-                            + apply.getUser().getName() + " was accepted")
-                    .build()
+                new MessageBuilder().info().defaultText(i18nService.applyWasRejected(apply)).build()
             );
         } else {
             messageContext.addMessage(
-                new MessageBuilder()
-                    .error()
-                    .defaultText("Apply for card \"" + apply.getCard().getName() + "\" for user " 
-                            + apply.getUser().getName() + " was already closed")
-                    .build()
+                new MessageBuilder().error().defaultText(i18nService.applyWasAlreadyResolved(apply)).build()
             );
         }
     }

@@ -55,4 +55,10 @@ public interface I18nService {
     String viewCard();
     String makeApply();
     String getApply();
+    String applyWasMadeFor(Apply apply);
+    String applyWasAccepted(Apply apply);
+    String applyWasAlreadyResolved(Apply apply);
+    String applyWasRejected(Apply apply);
+    String cardWasSaved(Card card);
+    String cardWasDeleted(Card card);
 }
