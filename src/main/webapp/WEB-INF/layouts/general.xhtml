@@ -34,6 +34,11 @@
                             url="#{s:areAnyGranted('ROLE_ADMIN') ? 'adminCardsList' : 'userCardsList'}" />
                         
                         <p:menuitem 
+                            value="#{i18nService.applies()}" icon="ui-icon-calculator" 
+                            rendered="#{s:areAnyGranted('ROLE_ADMIN')}"
+                            url="adminAppliesList" />
+                        
+                        <p:menuitem 
                             value="#{i18nService.users()}" icon="ui-icon-person" 
                             rendered="#{s:areAnyGranted('ROLE_ADMIN')}"
                             url="adminUsersList" />
