@@ -89,16 +89,7 @@ public class I18nServiceImpl implements I18nService {
         if (username == null) {
             return "Анонінмий користувач";
         }
-        
-        User user = userService.getUser(username);
-        if (user == null) {
-            return "Анонінмий користувач";
-        }
-        
-        if ("ROLE_ADMIN".equals(user.getRole())) {
-            return "Адміністратор " + user.getFullname();
-        }
-        return "Користувач " + user.getFullname();
+        return user(userService.getUser(username));
     }
     
     @Override
@@ -218,7 +209,7 @@ public class I18nServiceImpl implements I18nService {
     }
     
     @Override
-    public String areYouSureToDelete(Card card) {
+    public String areYouSureToDeleteCard(Card card) {
         if (card == null) {
             return "Ви дійсно бажаєте видалити картку?";
         }
@@ -226,7 +217,7 @@ public class I18nServiceImpl implements I18nService {
     }
     
     @Override
-    public String confirmDeletion(Card card) {
+    public String confirmCardDeletion(Card card) {
         if (card == null) {
             return "Підтвердіть видалення картки";
         }
@@ -329,5 +320,93 @@ public class I18nServiceImpl implements I18nService {
     @Override
     public String cardWasDeleted(Card card) {
         return "Картка '" + card.getName() + "' видалена";
+    }
+    
+    @Override
+    public String users() {
+        return "Користувачі";
+    }
+    
+    @Override
+    public String newUser() {
+        return "Створити нового користувача";
+    }
+    
+    @Override
+    public String deleteUser() {
+        return "Видалити користувача";
+    }
+    
+    @Override
+    public String editUser() {
+        return "Редагувати користувача";
+    }
+    
+    @Override
+    public String appliesForUser() {
+        return "Переглянути заявки користувача";
+    }
+    
+    @Override
+    public String userFullname() {
+        return "Ім'я користувача";
+    }
+    
+    @Override
+    public String userRole() {
+        return "Роль";
+    }
+    
+    @Override
+    public String userRole(String role) {
+        if ("ROLE_ADMIN".equals(role)) {
+            return "Адміністратор";
+        }
+        if ("ROLE_USER".equals(role)) {
+            return "Користувач";
+        }
+        return "";
+    }
+    
+    @Override
+    public String user(User user) {
+        if (user == null) {
+            return "Анонінмий користувач";
+        }
+        if (user.getId() == null) {
+            return "Новий користувач";
+        }
+        return userRole(user.getRole()) + " " + user.getFullname();
+    }
+    
+    @Override
+    public String userWasSaved(User userToSave) {
+        return user(userToSave) + " збережений";
+    }
+    
+    @Override
+    public String areYouSureToDeleteUser(User user) {
+        if (user == null) {
+            return "Ви дійсно бажаєте видалити користувача?";
+        }
+        return "Ви дійсно бажаєте видалити користувача '" + user.getFullname() + "'?";
+    }
+    
+    @Override
+    public String confirmUserDeletion(User user) {
+        if (user == null) {
+            return "Підтвердіть видалення користувача";
+        }
+        return "Підтвердіть видалення користувача '" + user.getFullname() + "'";
+    }
+    
+    @Override
+    public String userCantDeleteItself() {
+        return "Неможливо видалити самого себе";
+    }
+    
+    @Override
+    public String userWasDeleted(User userToDelete) {
+        return user(userToDelete) + " був успішно видалений";
     }
 }

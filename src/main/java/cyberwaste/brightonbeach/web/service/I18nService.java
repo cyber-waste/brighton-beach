@@ -2,6 +2,7 @@ package cyberwaste.brightonbeach.web.service;
 
 import cyberwaste.brightonbeach.domain.Apply;
 import cyberwaste.brightonbeach.domain.Card;
+import cyberwaste.brightonbeach.domain.User;
 
 public interface I18nService {
     
@@ -40,8 +41,8 @@ public interface I18nService {
     String deleteCard();
     String editCard();
     String appliesForCard();
-    String areYouSureToDelete(Card card);
-    String confirmDeletion(Card card);
+    String areYouSureToDeleteCard(Card card);
+    String confirmCardDeletion(Card card);
     String yes();
     String no();
     String card(Card card);
@@ -61,4 +62,18 @@ public interface I18nService {
     String applyWasRejected(Apply apply);
     String cardWasSaved(Card card);
     String cardWasDeleted(Card card);
+    String users();
+    String newUser();
+    String deleteUser();
+    String editUser();
+    String appliesForUser();
+    String userFullname();
+    String userRole();
+    String userRole(String role);
+    String user(User user);
+    String userWasSaved(User userToSave);
+    String areYouSureToDeleteUser(User user);
+    String confirmUserDeletion(User user);
+    String userCantDeleteItself();
+    String userWasDeleted(User userToDelete);
 }

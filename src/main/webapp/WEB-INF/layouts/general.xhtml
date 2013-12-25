@@ -32,6 +32,11 @@
                             value="#{i18nService.cards()}" icon="ui-icon-bookmark" 
                             disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}"
                             url="#{s:areAnyGranted('ROLE_ADMIN') ? 'adminCardsList' : 'userCardsList'}" />
+                        
+                        <p:menuitem 
+                            value="#{i18nService.users()}" icon="ui-icon-person" 
+                            rendered="#{s:areAnyGranted('ROLE_ADMIN')}"
+                            url="adminUsersList" />
                             
                         <p:menuitem 
                             value="#{i18nService.loggedOut()}" icon="ui-icon-close" rendered="#{not empty currentUser.name}" 

@@ -38,14 +38,20 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(max = 40)
-    @Column(name = "fullname", unique=true)
+    @Column(name = "fullname")
     private String fullname;
     
     @Basic(optional = false)
     @NotNull
     @Size(max = 40)
-    @Column(name = "role", unique=true)
+    @Column(name = "role")
     private String role;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(max = 40)
+    @Column(name = "password")
+    private String password;
 
     public User() {}
 
@@ -88,6 +94,14 @@ public class User implements Serializable {
     
     public void setRole(String role) {
         this.role = role;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

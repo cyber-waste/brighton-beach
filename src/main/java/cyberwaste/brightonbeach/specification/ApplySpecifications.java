@@ -18,7 +18,15 @@ public final class ApplySpecifications {
     private ApplySpecifications() { }
     
     public static SerializableSpecification<Apply> any() {
-        return SpecificationUtils.any();
+        return new SerializableSpecification<Apply>() {
+            
+            private static final long serialVersionUID = 5685641594452441163L;
+            
+            @Override
+            public Predicate toPredicate(Root<Apply> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.isTrue(cb.literal(Boolean.TRUE));
+            }
+        };
     }
     
     public static SerializableSpecification<Apply> ofCardAndUser(final Card card, final String username) {
@@ -50,12 +58,19 @@ public final class ApplySpecifications {
                 } else if (StringUtils.isNotBlank(cardNameLike)) {
                     root.join(Apply_.card);
                     resultPredicate = criteriaBuilder.and(resultPredicate,
-                        criteriaBuilder.like(criteriaBuilder.upper(root.get(Apply_.card).get(Card_.name)), SpecificationUtils.prepareSqlContainsPattern(cardNameLike))
+                        criteriaBuilder.like(criteriaBuilder.upper(root.get(Apply_.card).get(Card_.name)), prepareSqlContainsPattern(cardNameLike))
                     );
                 }
                 
                 return resultPredicate;
             }
         };
+    }
+    
+    private static String prepareSqlContainsPattern(String substring) {
+        if (substring == null) {
+            return "%";
+        }
+        return "%" + substring.toUpperCase() + "%";
     }
 }

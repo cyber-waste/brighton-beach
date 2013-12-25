@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+            http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      
+      start-state="users">
+    
+    <secured attributes="ROLE_ADMIN"/>
+    
+    <var name="flowScope.selectedObject" class="cyberwaste.brightonbeach.domain.User" />
+    
+    <on-start>
+        <set name="flowScope.specification" value="T(cyberwaste.brightonbeach.specification.UserSpecifications).any()" />
+    </on-start>
+    
+    <view-state id="users">
+        <on-entry>
+            <set name="flowScope.selectedObject" value="null" />
+            <evaluate expression="userService.findSpecified(flowScope.specification)" result="viewScope.specifiedObjects" />
+        </on-entry>
+        
+        <transition on="applyFilter" to="users">
+            <set 
+                name="flowScope.specification" 
+                value="T(cyberwaste.brightonbeach.specification.UserSpecifications).withNameContains(flowScope.filteringUserName)" />
+        </transition>
+        
+        <transition on="cancelFiltering" to="users">
+            <set name="flowScope.specification" value="T(cyberwaste.brightonbeach.specification.UserSpecifications).any()" />
+            <set name="flowScope.filteringUserName" value="''" />
+        </transition>
+        
+        <transition on="editObject" to="userEditor"/>
+        
+        <transition on="appliesForUser" to="appliesForUser"/>
+        
+        <transition on="deleteObject" to="users">
+            <evaluate expression="userService.delete(currentUser.name, flowScope.selectedObject, messageContext)" />
+        </transition>
+        
+        <transition on="newObject" to="userEditor">
+            <set name="flowScope.selectedObject" value="userService.create()" />
+        </transition>
+    </view-state>
+    
+    <view-state id="userEditor">
+        <transition on="objectsList" to="users" />
+        
+        <transition on="saveObject" to="users">
+            <evaluate expression="userService.save(flowScope.selectedObject, messageContext)" />
+        </transition>
+    </view-state>
+    
+    <subflow-state id="appliesForUser" subflow="underConstruction">
+        <!-- <input name="inputExactCard" value="flowScope.selectedObject" /> -->
+        <transition to="users" />
+    </subflow-state>
+    
+</flow>
