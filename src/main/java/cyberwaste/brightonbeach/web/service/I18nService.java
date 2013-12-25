@@ -50,4 +50,6 @@ public interface I18nService {
     String fileName();
     String uploadFile();
     String chooseFile();
+    String underConstruction();
+    String download();
 }

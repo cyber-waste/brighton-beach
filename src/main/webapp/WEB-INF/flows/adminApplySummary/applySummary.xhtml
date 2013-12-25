@@ -45,8 +45,8 @@
                             <p:inputText id="username" readonly="true" value="#{flowScope.selectedObject.user.fullname}" />
                             
                             <p:outputLabel for="state" value="#{i18nService.status()}" />
-                            <p:inputText id="state" readonly="true" value="#{i18nService.status(flowScope.selectedObject.state)}" />
-                            
+                            <p:inputText 
+                                id="state" readonly="true" value="#{i18nService.status(flowScope.selectedObject.state)}" />
                         </h:panelGrid>
                     </p:panel>
                     

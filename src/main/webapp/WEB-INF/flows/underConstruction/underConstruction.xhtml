@@ -1,4 +1,4 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition 
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -6,7 +6,7 @@
         xmlns:p="http://primefaces.org/ui"
         template="/WEB-INF/layouts/general.xhtml">
 
-    <ui:param name="centerHeader" value="Under construction" />
+    <ui:param name="centerHeader" value="#{i18nService.underConstruction()}" />
     <ui:param name="showToolBar" value="false" />
 
     <ui:define name="center">

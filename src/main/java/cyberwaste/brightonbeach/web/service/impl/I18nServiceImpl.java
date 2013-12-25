@@ -275,4 +275,14 @@ public class I18nServiceImpl implements I18nService {
     public String chooseFile() {
         return "Вибрати файли";
     }
+    
+    @Override
+    public String underConstruction() {
+        return "У розробці";
+    }
+    
+    @Override
+    public String download() {
+        return "Завантажити файл";
+    }
 }
