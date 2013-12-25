@@ -44,4 +44,10 @@ public interface I18nService {
     String confirmDeletion(Card card);
     String yes();
     String no();
+    String card(Card card);
+    String save();
+    String attachedFiles();
+    String fileName();
+    String uploadFile();
+    String chooseFile();
 }

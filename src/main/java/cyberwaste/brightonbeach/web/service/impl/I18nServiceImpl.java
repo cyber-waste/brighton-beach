@@ -242,4 +242,37 @@ public class I18nServiceImpl implements I18nService {
     public String yes() {
         return "Так";
     }
+    
+    @Override
+    public String card(Card card) {
+        if (card.getId() == null) {
+            return "Нова картка";
+        }
+        return "Картка '" + card.getName() + "'";
+    }
+    
+    @Override
+    public String save() {
+        return "Зберегти зміни";
+    }
+    
+    @Override
+    public String attachedFiles() {
+        return "Прикріплені файли";
+    }
+    
+    @Override
+    public String fileName() {
+        return "Ім'я файлу";
+    }
+    
+    @Override
+    public String uploadFile() {
+        return "Завантажити файл";
+    }
+    
+    @Override
+    public String chooseFile() {
+        return "Вибрати файли";
+    }
 }

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -10,17 +9,16 @@
                 
                 template="/WEB-INF/layouts/general.xhtml">
     
-    <ui:param name="title" value="Card &quot;#{flowScope.selectedObject.name}&quot;" />
-    <ui:param name="panelTitle" value="Card &quot;#{flowScope.selectedObject.name}&quot;" />
-    <ui:param name="title" value="#{ empty flowScope.selectedObject.id ? 'New Card' : title }" />
-    <ui:param name="panelTitle" value="#{ empty flowScope.selectedObject.id ? 'New Card' : panelTitle }" />
+    <ui:param name="title" value="#{i18nService.card(flowScope.selectedObject)}" />
+    <ui:param name="panelTitle" value="#{i18nService.card(flowScope.selectedObject)}" />
     
     <ui:define name="leftToolbar">
-        <p:commandButton value="Cards" action="objectsList" icon="ui-icon-arrowreturnthick-1-w" process="@this" />
+        <p:commandButton 
+            value="#{i18nService.cards()}" action="objectsList" icon="ui-icon-arrowreturnthick-1-w" process="@this" />
         
         <p:separator />
         
-        <p:commandButton value="Save" action="saveObject" icon="ui-icon-check" ajax="false"/>
+        <p:commandButton value="#{i18nService.save()}" action="saveObject" icon="ui-icon-check" ajax="false"/>
     </ui:define>
 
     <ui:define name="center">
@@ -30,15 +28,10 @@
             <p:row>
                 <p:column styleClass="bb-top-aligment">
                 
-                    <p:panel header="Summary" styleClass="bb-noborder">
+                    <p:panel header="#{i18nService.information()}" styleClass="bb-noborder">
                         <h:panelGrid id="editPanel" columns="3">
                             
-                            <p:outputLabel for="id" value="Id" rendered="#{flowScope.selectedObject.id != null}" />
-                            <p:inputText
-                                id="id" value="#{flowScope.selectedObject.id}" readonly="true" size="80" rendered="#{flowScope.selectedObject.id != null}" />
-                            <p:message for="id" rendered="#{flowScope.selectedObject.id != null}" />
-                            
-                            <p:outputLabel for="name" value="Name" />
+                            <p:outputLabel for="name" value="#{i18nService.cardName()}" />
                             <p:inputText id="name" value="#{flowScope.selectedObject.name}" size="80" />
                             <p:message for="name"/>
                         </h:panelGrid>
@@ -48,7 +41,7 @@
                 
                 <p:column styleClass="bb-top-aligment">
                 
-                    <p:panel id="filesPanel" header="Attached files" styleClass="bb-noborder">
+                    <p:panel id="filesPanel" header="#{i18nService.attachedFiles()}" styleClass="bb-noborder">
                         <p:dataTable 
                                 id="childrenTable" widgetVar="childrenTable" value="#{files}" var="child" 
                                 selection="#{flowScope.selectedChild}" rowKey="#{child.id}" selectionMode="single" 
@@ -62,11 +55,7 @@
                                 onstart="childrenTableBlocker.show(); childrenTable.unselectAllRows()" 
                                 oncomplete="childrenTableBlocker.hide()" update=":centerForm:toolBar" />
                             
-                            <p:column headerText="Id">
-                                <h:outputText value="#{child.id}" />
-                            </p:column>
-                            
-                            <p:column headerText="Name">
+                            <p:column headerText="#{i18nService.fileName()}">
                                 <h:outputText value="#{child.name}" />
                             </p:column>
                             
@@ -86,10 +75,13 @@
     </ui:define>
     
     <ui:define name="afterForm">
-        <p:panel header="Upload file" styleClass="bb-noborder">
+        <p:panel 
+                header="#{i18nService.uploadFile()}" styleClass="bb-noborder" rendered="#{not empty flowScope.selectedObject.id}">
+                
             <h:form enctype="multipart/form-data">
                 <p:fileUpload 
-                    fileUploadListener="#{fileService.handleFileUpload}" auto="true" dragDropSupport="true" />
+                    fileUploadListener="#{fileService.handleFileUpload}" auto="true" dragDropSupport="true" 
+                    label="#{i18nService.chooseFile()}" />
             </h:form>
         </p:panel>
     </ui:define>
