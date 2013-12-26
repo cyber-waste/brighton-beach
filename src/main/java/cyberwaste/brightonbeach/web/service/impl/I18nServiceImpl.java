@@ -409,4 +409,229 @@ public class I18nServiceImpl implements I18nService {
     public String userWasDeleted(User userToDelete) {
         return user(userToDelete) + " був успішно видалений";
     }
+    
+    @Override
+    public String cardAuthor() {
+        return "Автор";
+    }
+    
+    @Override
+    public String cardDocumentDate() {
+        return "Дата документа";
+    }
+    
+    @Override
+    public String cardDocumentIndex() {
+        return "Індекс документа";
+    }
+    
+    @Override
+    public String cardArriveDate() {
+        return "Дата надходження";
+    }
+    
+    @Override
+    public String cardIndex() {
+        return "Індекс";
+    }
+    
+    @Override
+    public String cardHeader() {
+        return "Заголовок документа";
+    }
+    
+    @Override
+    public String cardResolution() {
+        return "Резолюція";
+    }
+    
+    @Override
+    public String cardPerformer() {
+        return "Відповідальний виконавець";
+    }
+    
+    @Override
+    public String cardStorageTerm() {
+        return "Строки виконання";
+    }
+    
+    @Override
+    public String cardDone() {
+        return "Позначка про виконання";
+    }
+    
+    @Override
+    public String cardPageNumber() {
+        return "Кількість аркушів";
+    }
+    
+    @Override
+    public String cardDoneTerm() {
+        return "Строк зберігання";
+    }
+    
+    @Override
+    public String cardTermIncrement() {
+        return "Відмітка про збільшення строку зберігання";
+    }
+    
+    @Override
+    public String cardConversionName() {
+        return "Ім'я конвертованого документу";
+    }
+    
+    @Override
+    public String cardConversionDate() {
+        return "Дата конвертування";
+    }
+    
+    @Override
+    public String cardConversionAct() {
+        return "Індекс акта про конвертування";
+    }
+    
+    @Override
+    public String cardConversionActFileName() {
+        return "Ім'я файлу з актом про конвертування";
+    }
+    
+    @Override
+    public String cardConversor() {
+        return "Особа, що здійснила конвертування";
+    }
+    
+    @Override
+    public String cardBeforeConversionType() {
+        return "Формат файлу до конвертування";
+    }
+    
+    @Override
+    public String cardAfterConversionType() {
+        return "Формат файлу після конвертування";
+    }
+    
+    @Override
+    public String cardConversionVersion() {
+        return "Версія конвертування";
+    }
+    
+    @Override
+    public String cardDestroyDate() {
+        return "Дата знищення файлу";
+    }
+    
+    @Override
+    public String cardDestroyAct() {
+        return "Індекс акту про знищення";
+    }
+    
+    @Override
+    public String cardDestroyer() {
+        return "Особа, що здійснила знищення";
+    }
+    
+    @Override
+    public String cardTechnicalReview() {
+        return "Індекс акту технічної перевірки";
+    }
+    
+    @Override
+    public String cardReviewAct() {
+        return "Ім'я файлу акту технічної перевірки";
+    }
+    
+    @Override
+    public String cardArriveMessageDate() {
+        return "Дата прочитання повідомлень про надходження";
+    }
+    
+    @Override
+    public String cardEditDate() {
+        return "Дата внесення змін";
+    }
+    
+    @Override
+    public String cardReviewDate() {
+        return "Дата ознайомлення";
+    }
+    
+    @Override
+    public String cardSuggestionReviewDate() {
+        return "Дата ознайомлення з пропозиціями";
+    }
+    
+    @Override
+    public String cardDesignReviewDate() {
+        return "Дата ознайомлення з проектом";
+    }
+    
+    @Override
+    public String cardUnit() {
+        return "Номер опису справ структурного підрозділу";
+    }
+    
+    @Override
+    public String cardUnitDate() {
+        return "Дата складання опису справ структурного підрозділу";
+    }
+    
+    @Override
+    public String cardDeal() {
+        return "Номер справи";
+    }
+    
+    @Override
+    public String cardVolume() {
+        return "Номер тому справи";
+    }
+    
+    @Override
+    public String cardDealIndex() {
+        return "Індекс справи";
+    }
+    
+    @Override
+    public String cardDealHeader() {
+        return "Заголовок справи";
+    }
+    
+    @Override
+    public String cardDealTerm() {
+        return "Строк зберігання справи";
+    }
+    
+    @Override
+    public String cardFund() {
+        return "Номер фонду";
+    }
+    
+    @Override
+    public String cardArchiveEdrpou() {
+        return "Код архівної установи";
+    }
+    
+    @Override
+    public String cardArchiveName() {
+        return "Найменування архівної установи";
+    }
+    
+    @Override
+    public String cardCountryId() {
+        return "Ідентифікатор країни";
+    }
+    
+    @Override
+    public String cardEdrpou() {
+        return "Код установи";
+    }
+    
+    @Override
+    public String cardEMessageAcceptReject() {
+        return "Індекс повідомлення про отримання/відхилення";
+    }
+    
+    @Override
+    public String cardPositionAcceptReject() {
+        return "Особа, яка отримала повідомлення";
+    }
 }

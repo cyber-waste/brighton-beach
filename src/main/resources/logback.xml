@@ -17,9 +17,9 @@
     <logger name="org.springframework.webflow" level="warn"/>
     <logger name="org.springframework.security" level="warn"/>
     <logger name="org.springframework.ldap" level="warn"/>
-    <logger name="org.hibernate" level="debug"/>
+    <logger name="org.hibernate" level="info"/>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
   

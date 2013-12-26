@@ -33,7 +33,214 @@
                             
                             <p:outputLabel for="name" value="#{i18nService.cardName()}" />
                             <p:inputText id="name" value="#{flowScope.selectedObject.name}" size="80" />
-                            <p:message for="name"/>
+                            <p:message for="name" />
+                            
+                            <p:outputLabel for="author" value="#{i18nService.cardAuthor()}" />
+                            <p:inputText id="author" value="#{flowScope.selectedObject.author}" size="80" />
+                            <p:message for="author" />
+                            
+                            <p:outputLabel for="documentDate" value="#{i18nService.cardDocumentDate()}" />
+                            <p:calendar
+                                id="documentDate" value="#{flowScope.selectedObject.documentDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="documentDate" />
+                            
+                            <p:outputLabel for="documentIndex" value="#{i18nService.cardDocumentIndex()}" />
+                            <p:inputText id="documentIndex" value="#{flowScope.selectedObject.documentIndex}" size="80" />
+                            <p:message for="documentIndex" />
+                            
+                            <p:outputLabel for="arriveDate" value="#{i18nService.cardArriveDate()}" />
+                            <p:calendar
+                                id="arriveDate" value="#{flowScope.selectedObject.arriveDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="arriveDate" />
+                            
+                            <p:outputLabel for="index" value="#{i18nService.cardIndex()}" />
+                            <p:inputText id="index" value="#{flowScope.selectedObject.index}" size="80" />
+                            <p:message for="index" />
+                            
+                            <p:outputLabel for="header" value="#{i18nService.cardHeader()}" />
+                            <p:inputText id="header" value="#{flowScope.selectedObject.header}" size="80" />
+                            <p:message for="header" />
+                            
+                            <p:outputLabel for="resolution" value="#{i18nService.cardResolution()}" />
+                            <p:inputText id="resolution" value="#{flowScope.selectedObject.resolution}" size="80" />
+                            <p:message for="resolution" />
+                            
+                            <p:outputLabel for="performer" value="#{i18nService.cardPerformer()}" />
+                            <p:inputText id="performer" value="#{flowScope.selectedObject.performer}" size="80" />
+                            <p:message for="performer" />
+                            
+                            <p:outputLabel for="storageTerm" value="#{i18nService.cardStorageTerm()}" />
+                            <p:calendar
+                                id="storageTerm" value="#{flowScope.selectedObject.storageTerm}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="storageTerm" />
+                            
+                            <p:outputLabel for="done" value="#{i18nService.cardDone()}" />
+                            <p:inputText id="done" value="#{flowScope.selectedObject.done}" size="80" />
+                            <p:message for="done" />
+                            
+                            <p:outputLabel for="pageNumber" value="#{i18nService.cardPageNumber()}" />
+                            <p:inputText id="pageNumber" value="#{flowScope.selectedObject.pageNumber}" size="80" />
+                            <p:message for="pageNumber" />
+                            
+                            <p:outputLabel for="doneTerm" value="#{i18nService.cardDoneTerm()}" />
+                            <p:calendar
+                                id="doneTerm" value="#{flowScope.selectedObject.doneTerm}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="doneTerm" />
+                            
+                            <p:outputLabel for="termIncrement" value="#{i18nService.cardTermIncrement()}" />
+                            <p:inputText id="termIncrement" value="#{flowScope.selectedObject.termIncrement}" size="80" />
+                            <p:message for="termIncrement" />
+                            
+                            <p:outputLabel for="conversionName" value="#{i18nService.cardConversionName()}" />
+                            <p:inputText id="conversionName" value="#{flowScope.selectedObject.conversionName}" size="80" />
+                            <p:message for="conversionName" />
+                            
+                            <p:outputLabel for="conversionDate" value="#{i18nService.cardConversionDate()}" />
+                            <p:calendar
+                                id="conversionDate" value="#{flowScope.selectedObject.conversionDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="conversionDate" />
+                            
+                            <p:outputLabel for="conversionAct" value="#{i18nService.cardConversionAct()}" />
+                            <p:inputText id="conversionAct" value="#{flowScope.selectedObject.conversionAct}" size="80" />
+                            <p:message for="conversionAct" />
+                            
+                            <p:outputLabel for="conversionActFileName" value="#{i18nService.cardConversionActFileName()}" />
+                            <p:inputText id="conversionActFileName" value="#{flowScope.selectedObject.conversionActFileName}" size="80" />
+                            <p:message for="conversionActFileName" />
+                            
+                            <p:outputLabel for="conversor" value="#{i18nService.cardConversor()}" />
+                            <p:inputText id="conversor" value="#{flowScope.selectedObject.conversor}" size="80" />
+                            <p:message for="conversor" />
+                            
+                            <p:outputLabel for="beforeConversionType" value="#{i18nService.cardBeforeConversionType()}" />
+                            <p:inputText id="beforeConversionType" value="#{flowScope.selectedObject.beforeConversionType}" size="80" />
+                            <p:message for="beforeConversionType" />
+                            
+                            <p:outputLabel for="afterConversionType" value="#{i18nService.cardAfterConversionType()}" />
+                            <p:inputText id="afterConversionType" value="#{flowScope.selectedObject.afterConversionType}" size="80" />
+                            <p:message for="afterConversionType" />
+                            
+                            <p:outputLabel for="conversionVersion" value="#{i18nService.cardConversionVersion()}" />
+                            <p:inputText id="conversionVersion" value="#{flowScope.selectedObject.conversionVersion}" size="80" />
+                            <p:message for="conversionVersion" />
+                            
+                            <p:outputLabel for="destroyDate" value="#{i18nService.cardDestroyDate()}" />
+                            <p:calendar
+                                id="destroyDate" value="#{flowScope.selectedObject.destroyDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="destroyDate" />
+                            
+                            <p:outputLabel for="destroyAct" value="#{i18nService.cardDestroyAct()}" />
+                            <p:inputText id="destroyAct" value="#{flowScope.selectedObject.destroyAct}" size="80" />
+                            <p:message for="destroyAct" />
+                            
+                            <p:outputLabel for="destroyer" value="#{i18nService.cardDestroyer()}" />
+                            <p:inputText id="destroyer" value="#{flowScope.selectedObject.destroyer}" size="80" />
+                            <p:message for="destroyer" />
+                            
+                            <p:outputLabel for="technicalReview" value="#{i18nService.cardTechnicalReview()}" />
+                            <p:inputText id="technicalReview" value="#{flowScope.selectedObject.technicalReview}" size="80" />
+                            <p:message for="technicalReview" />
+                            
+                            <p:outputLabel for="reviewAct" value="#{i18nService.cardReviewAct()}" />
+                            <p:inputText id="reviewAct" value="#{flowScope.selectedObject.reviewAct}" size="80" />
+                            <p:message for="reviewAct" />
+                            
+                            <p:outputLabel for="arriveMessageDate" value="#{i18nService.cardArriveMessageDate()}" />
+                            <p:calendar
+                                id="arriveMessageDate" value="#{flowScope.selectedObject.arriveMessageDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="arriveMessageDate" />
+                            
+                            <p:outputLabel for="editDate" value="#{i18nService.cardEditDate()}" />
+                            <p:calendar
+                                id="editDate" value="#{flowScope.selectedObject.editDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="editDate" />
+                            
+                            <p:outputLabel for="reviewDate" value="#{i18nService.cardReviewDate()}" />
+                            <p:calendar
+                                id="reviewDate" value="#{flowScope.selectedObject.reviewDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="reviewDate" />
+                            
+                            <p:outputLabel for="suggestionReviewDate" value="#{i18nService.cardSuggestionReviewDate()}" />
+                            <p:calendar
+                                id="suggestionReviewDate" value="#{flowScope.selectedObject.suggestionReviewDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="suggestionReviewDate" />
+                            
+                            <p:outputLabel for="designReviewDate" value="#{i18nService.cardDesignReviewDate()}" />
+                            <p:calendar
+                                id="designReviewDate" value="#{flowScope.selectedObject.designReviewDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="designReviewDate" />
+                            
+                            <p:outputLabel for="unit" value="#{i18nService.cardUnit()}" />
+                            <p:inputText id="unit" value="#{flowScope.selectedObject.unit}" size="80" />
+                            <p:message for="unit" />
+                            
+                            <p:outputLabel for="unitDate" value="#{i18nService.cardUnitDate()}" />
+                            <p:calendar
+                                id="unitDate" value="#{flowScope.selectedObject.unitDate}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="unitDate" />
+                            
+                            <p:outputLabel for="deal" value="#{i18nService.cardDeal()}" />
+                            <p:inputText id="deal" value="#{flowScope.selectedObject.deal}" size="80" />
+                            <p:message for="deal" />
+                            
+                            <p:outputLabel for="volume" value="#{i18nService.cardVolume()}" />
+                            <p:inputText id="volume" value="#{flowScope.selectedObject.volume}" size="80" />
+                            <p:message for="volume" />
+                            
+                            <p:outputLabel for="dealIndex" value="#{i18nService.cardDealIndex()}" />
+                            <p:inputText id="dealIndex" value="#{flowScope.selectedObject.dealIndex}" size="80" />
+                            <p:message for="dealIndex" />
+                            
+                            <p:outputLabel for="dealHeader" value="#{i18nService.cardDealHeader()}" />
+                            <p:inputText id="dealHeader" value="#{flowScope.selectedObject.dealHeader}" size="80" />
+                            <p:message for="dealHeader" />
+                            
+                            <p:outputLabel for="dealTerm" value="#{i18nService.cardDealTerm()}" />
+                            <p:calendar
+                                id="dealTerm" value="#{flowScope.selectedObject.dealTerm}" 
+                                pattern="MM/dd/yyyy HH:mm:ss" showButtonPanel="true" size="80" />
+                            <p:message for="dealTerm" />
+                            
+                            <p:outputLabel for="fund" value="#{i18nService.cardFund()}" />
+                            <p:inputText id="fund" value="#{flowScope.selectedObject.fund}" size="80" />
+                            <p:message for="fund" />
+                            
+                            <p:outputLabel for="archiveEdrpou" value="#{i18nService.cardArchiveEdrpou()}" />
+                            <p:inputText id="archiveEdrpou" value="#{flowScope.selectedObject.archiveEdrpou}" size="80" />
+                            <p:message for="archiveEdrpou" />
+                            
+                            <p:outputLabel for="archiveName" value="#{i18nService.cardArchiveName()}" />
+                            <p:inputText id="archiveName" value="#{flowScope.selectedObject.archiveName}" size="80" />
+                            <p:message for="archiveName" />
+                            
+                            <p:outputLabel for="countryId" value="#{i18nService.cardCountryId()}" />
+                            <p:inputText id="countryId" value="#{flowScope.selectedObject.countryId}" size="80" />
+                            <p:message for="countryId" />
+                            
+                            <p:outputLabel for="edrpou" value="#{i18nService.cardEdrpou()}" />
+                            <p:inputText id="edrpou" value="#{flowScope.selectedObject.edrpou}" size="80" />
+                            <p:message for="edrpou" />
+                            
+                            <p:outputLabel for="eMessageAcceptReject" value="#{i18nService.cardEMessageAcceptReject()}" />
+                            <p:inputText id="eMessageAcceptReject" value="#{flowScope.selectedObject.eMessageAcceptReject}" size="80" />
+                            <p:message for="eMessageAcceptReject" />
+                            
+                            <p:outputLabel for="positionAcceptReject" value="#{i18nService.cardPositionAcceptReject()}" />
+                            <p:inputText id="positionAcceptReject" value="#{flowScope.selectedObject.positionAcceptReject}" size="80" />
+                            <p:message for="positionAcceptReject" />
+                            
                         </h:panelGrid>
                     </p:panel>
                     
