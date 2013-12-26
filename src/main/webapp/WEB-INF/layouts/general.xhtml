@@ -44,6 +44,10 @@
                             url="adminUsersList" />
                             
                         <p:menuitem 
+                            value="#{i18nService.guide()}" icon="ui-icon-help" rendered="#{not empty currentUser.name}" 
+                            url="#{s:areAnyGranted('ROLE_ADMIN') ? 'http://localhost:8080/brighton-beach/help/admin.pdf' : 'http://localhost:8080/brighton-beach/help/user.pdf'}" />
+                            
+                        <p:menuitem 
                             value="#{i18nService.loggedOut()}" icon="ui-icon-close" rendered="#{not empty currentUser.name}" 
                             url="logout" />
                     </p:menubar>

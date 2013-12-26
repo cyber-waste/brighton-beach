@@ -121,4 +121,5 @@ public interface I18nService {
     String cardEdrpou();
     String cardEMessageAcceptReject();
     String cardPositionAcceptReject();
+    String guide();
 }

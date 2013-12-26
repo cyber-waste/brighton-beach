@@ -634,4 +634,9 @@ public class I18nServiceImpl implements I18nService {
     public String cardPositionAcceptReject() {
         return "Особа, яка отримала повідомлення";
     }
+    
+    @Override
+    public String guide() {
+        return "Допомога";
+    }
 }
