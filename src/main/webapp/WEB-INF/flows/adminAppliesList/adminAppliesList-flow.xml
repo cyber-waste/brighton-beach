@@ -51,7 +51,7 @@
         <transition to="applies" />
     </subflow-state>
     
-    <subflow-state id="cardOfApply" subflow="cardSummary">
+    <subflow-state id="cardOfApply" subflow="underConstruction">
         <input name="card" value="flowScope.selectedObject.card" />
         <transition to="applies" />
     </subflow-state>
