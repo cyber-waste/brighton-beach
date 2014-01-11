@@ -30,7 +30,7 @@
                     <p:menubar autoDisplay="false" styleClass="bb-title-menu" >
                         <p:menuitem 
                             value="#{i18nService.cards()}" icon="ui-icon-bookmark" 
-                            disabled="#{s:areNotGranted('ROLE_USER,ROLE_ADMIN')}"
+                            rendered="#{s:areAnyGranted('ROLE_USER,ROLE_ADMIN')}"
                             url="#{s:areAnyGranted('ROLE_ADMIN') ? 'adminCardsList' : 'userCardsList'}" />
                         
                         <p:menuitem 
@@ -45,7 +45,7 @@
                             
                         <p:menuitem 
                             value="#{i18nService.guide()}" icon="ui-icon-help" rendered="#{not empty currentUser.name}" 
-                            url="#{s:areAnyGranted('ROLE_ADMIN') ? 'http://localhost:8080/brighton-beach/help/admin.pdf' : 'http://localhost:8080/brighton-beach/help/user.pdf'}" />
+                            url="#{s:areAnyGranted('ROLE_ADMIN') ? '/help/admin.pdf' : '/help/user.pdf'}" />
                             
                         <p:menuitem 
                             value="#{i18nService.loggedOut()}" icon="ui-icon-close" rendered="#{not empty currentUser.name}" 
