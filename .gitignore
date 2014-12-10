@@ -1,12 +1,14 @@
-# Eclipse #
-.settings/*
+# Eclipse
 .classpath
 .project
-bin/*
+.metadata
+.settings/
 
-# Gradle #
-.gradle/*
-build/*
+# Intellij
+.idea/
+out/
+*.iml
+*.iws
 
 # Tomcat #
 tomcat/*
@@ -20,11 +22,36 @@ tomcat/webapps/brighton-beach.war
 !tomcat/NOTICE
 !tomcat/RELEASE-NOTES
 !tomcat/.gitattributes
+# Mac
+.DS_Store
 
-# Environment #
-src/main/resources/env-datasource.properties
+# Maven
+log/
+target/
 
-# Runtime #
-data/*
-/build
-/bin
+#Gradle
+gradle/
+.gradle/
+gradlew
+gradlew.bat
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Python
+*.py[cod]
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+MANIFEST

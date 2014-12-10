@@ -639,9 +639,4 @@ public class I18nServiceImpl implements I18nService {
     public String guide() {
         return "Допомога";
     }
-    
-    @Override
-    public String developers() {
-        return "Розробники: Грицун Владислав, Єрмілов Ярослав, Ігнатенко Дмитро";
-    }
 }
